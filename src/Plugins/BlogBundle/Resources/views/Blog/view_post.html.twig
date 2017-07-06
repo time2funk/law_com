@@ -1,0 +1,81 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{# {% block title %}{{- post.metatitle ? post.metatitle : '' }} - Law office of Yelena Sharova{% endblock %} #}
+{% block title %}{{- post.metatitle ? post.metatitle : '' }}{% endblock %}
+{% block meta_keywords %}{{- post.metakeywords ? post.metakeywords : parent() }}{% endblock %}
+{% block meta_description %}{{- post.metadescription ? post.metadescription : parent() }}{% endblock %}
+{% block og_title %}{{- post.metatitle ? post.metatitle : parent() -}}{% endblock %}
+{% block og_descr %}{{- post.metadescription ? post.metadescription : parent() -}}{% endblock %}
+{% block last_updated_block %}{{ post.updatedAtDatetime}}{% endblock %}
+
+{% block ampLinkBlock %}
+    {% render controller("AppBundle:Amp:ampLinkBlock", {'request' : app.request }) %}
+{% endblock %}
+
+{% block bodyId %}blog{% endblock %}
+
+{% block content %}
+<wrapper>
+		<section id="blog" class="parent container-fluid">
+				<div class="row">
+					<div class="submenu">
+
+						<div id="side_menu">
+
+							<h2>Blog</h2>
+							<div class="psearch">
+									<input type="text" id='search'>
+									<!-- <i class="fa fa-search" aria-hidden="true"></i> -->
+									<img class="s_pbtn" src="/img/s-icon.svg" alt="">
+							</div>
+
+							{% render controller("PluginsBlogBundle:Blog:blogVerticalMenu", {categoryId: post.blogCategory ? post.blogCategory.id : null, topicId: post.blogTopic ? post.blogTopic.id : null, home : false, name : 'Blog' }) %}
+
+							<!-- {% include "PluginsPracticAreaBundle:PracticArea:google_map_pa.html.twig" %} -->
+						</div>
+						<div class="fb-square">{% include 'default/fb-square.html.twig' %}</div>
+				</div>
+        {% include "PluginsBlogBundle:Blog:search.ajax.html.twig" %}
+				<div class="content">
+
+          {#
+          {% include "default/breadcrumbs.html.twig" with { 'elements': {
+                  0: {'url': "plugins_blog_homepage", 'name': "Blog" },
+                  1: {'url': post.blogCategory.url, 'name': post.blogCategory.name}
+              }, 'currentPage': post.name, 'home' : false }
+          %}
+          #}
+
+						{% include "default/breadcrumbs.html.twig" with { 'currentPage': post.name, 'elements':
+								{
+										0: {'url': "plugins_blog_homepage", 'name': "Blog" }
+								}, 'currentPage': post.blogCategory.name, 'home' : false
+						} %}
+
+            <div  id='static-show'>
+              <div class="txt">
+    						<h1>{{ post.name }}</h1>
+    						<div class="postdate">
+                  {{ post.dateUsFormat }}&nbsp;@&nbsp;
+                  <a href="{{ post.blogCategory.url }}">{{ post.blogCategory.name }}</a>
+                </div>
+    						{{ post.content | raw }}
+
+    						<hr>
+    						{% include "default/fb.html.twig" %}
+    					</div>
+            </div>
+            <div class="list" id="blog-filtered">
+              <ul id='search_show'>
+              </ul>
+            </div>
+				</div>
+
+				<div class="contactus">
+						{% include "AppBundle:Contact:contact_block_form.html.twig" %}
+						<div class="fb-square">{% include 'default/fb-square.html.twig' %}</div>
+				</div>
+					</div>
+			</section>
+	</wrapper>
+{% endblock %}

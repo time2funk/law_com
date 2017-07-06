@@ -1,0 +1,7 @@
+parameters:
+#    letra_by_site_map.example.class: LetraBy\SiteMapBundle\Example
+
+services:
+#    letra_by_site_map.example:
+#        class: %letra_by_site_map.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

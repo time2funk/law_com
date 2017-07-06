@@ -1,0 +1,164 @@
+///////////VAR/////////////////////////////
+var map_bool = false;
+///////////FUNC////////////////////////////
+function SliderInit(name){
+  var arr = $(name);
+  for(var i=0; i < arr.length; i++ ){
+    var ul = $( arr[i] ).find('ul.slides');
+    var li = $(ul).find('li');
+    if( li.length > 2){
+      var cur_i = li[0];
+      var next_i = li[1];
+      var prev_i = li[li.length-1];
+
+      $(cur_i).addClass('cur');
+      $(next_i).addClass('next');
+      $(prev_i).addClass('prev');
+
+      var cntrls = $( arr[i] ).find('div.cntrls');
+      var next = $( cntrls ).find('.next');
+      var prev = $( cntrls ).find('.prev');
+
+      next[0].addEventListener( "click" , function(e){
+        var ul_tar = e.target.parentNode.parentNode.parentNode;
+        var li = $( ul_tar ).find('li');
+        var cur = $( ul_tar ).find('.cur')[0];
+        var next = $( ul_tar ).find('.next')[0];
+        var prev = $( ul_tar ).find('.prev')[0];
+        cur.classList.add('prev');
+        cur.classList.remove('cur');
+        prev.classList.remove('prev');
+        next.classList.add('cur');
+        next.classList.remove('next');
+        if( next.nextElementSibling ){
+          next.nextElementSibling.classList.add('next');
+        }
+        else{
+           li[0].classList.add('next');
+        }
+      }, false );
+
+      prev[0].addEventListener( "click" , function(e){
+        var ul_tar = e.target.parentNode.parentNode.parentNode;
+        var li = $( ul_tar ).find('li');
+        var cur = $( ul_tar ).find('.cur')[0];
+        var next = $( ul_tar ).find('.next')[0];
+        var prev = $( ul_tar ).find('.prev')[0];
+        cur.classList.add('next');
+        cur.classList.remove('cur');
+        next.classList.remove('next');
+        prev.classList.add('cur');
+        prev.classList.remove('prev');
+        if( prev.previousElementSibling ){
+          prev.previousElementSibling.classList.add('prev');
+        }
+        else{
+          li[li.length-1].classList.add('prev');
+        }
+      }, false );
+    }
+  }
+}
+function toggleMap(){
+  if(!map_bool){
+    var map_wrap = document.getElementById('hidecont');
+    var height = map_wrap.childNodes[1].clientHeight;
+    map_wrap.style.height = height+"px";
+    map_bool = true;
+  }else{
+    var map_wrap = document.getElementById('hidecont');
+    map_wrap.style.height = 0+"px";
+    map_bool = false;
+  }
+}
+function blockFix(name, val, left){
+  if( $(this).scrollTop() > val){
+      $(name).addClass('fixed');
+      if(left)
+        $(name).css('left', left);
+  }else{
+    $(name).removeClass('fixed');
+    if(left)
+      $(name).css('left', 'initial');
+  }
+}
+function offsetPosition(element) {
+  var offsetLeft = 0, offsetTop = 0;
+  do {
+      offsetLeft += element.offsetLeft;
+      offsetTop  += element.offsetTop;
+  } while (element = element.offsetParent);
+  return [offsetLeft, offsetTop];
+}
+function inputLableUp(){
+  $('#contactus input').on('input', function() {
+    var val = $(this).val();
+    if(val){
+      $(this).parent().addClass('filled')
+    }else{
+      $(this).parent().removeClass('filled')
+    }
+  });
+}
+function twoLvlMenu(name){
+  var menu = $(name);
+  if(menu){
+    // menu.find('ul').slideUp();
+    menu.children('i').on('click', function(e){
+      // $('#pa_section li.link.two-lvl').removeClass('focus');
+      $(this).parent().toggleClass('focus');
+      $(this).parent().find('ul').slideToggle();
+      e.preventDefault();
+    })
+  }
+  return false;
+}
+///////////MAIN////////////////////////////
+$(function(){
+  console.log('start');
+  var menu_t = document.getElementById ('top_menu');
+  var section = document.getElementById("p_blog");
+  // var contact = document.getElementById('contactus');
+  if(section){
+    var dist2top = offsetPosition(section)[1] - 70;
+    blockFix('#side_menu', dist2top );
+  }
+
+  inputLableUp();
+  twoLvlMenu('#pa_section li.link.two-lvl');
+  blockFix('header', 60);
+  // blockFix('#up2top', 100);
+  SliderInit('.pslider');
+  //S C R O L L
+  $(window).scroll(function(){
+    // console.log( 'scroll: ' + $(this).scrollTop() );
+    blockFix('header', 60);
+    // blockFix('#up2top', 100);
+    if(section)
+      blockFix('#side_menu', dist2top );
+  });
+  //R E S I Z E
+  $(window).resize(function () {
+    var section = document.getElementById("p_blog");
+    // var menu_b = document.getElementById("menu_bot");
+    if(section){
+      dist2top = offsetPosition(section)[1] - 70;
+    }
+  });
+  // <a href='#'> smoothie slide
+  $(document).on('click', 'a[href^="#"]', function (targ) {
+    var el = targ['currentTarget'];
+    if( el.className.indexOf('anchor') > -1 ){
+      href = el.getAttribute("href");
+      $('html, body').animate({
+        scrollTop: $(""+href).offset().top
+      }, 1000 );
+    }
+    return false;
+   });
+   // accordion
+   $('#practice-short .panel a').on('click', function(e){
+    $('#practice-short .panel-collapse').removeClass('act');
+    $(this).parent().parent().find('.panel-collapse').toggleClass('act');
+   });
+});

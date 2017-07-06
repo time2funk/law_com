@@ -1,0 +1,69 @@
+<section id="p_startpage"style="height: calc(100vh - 160px);">
+  <div class="container tbl">
+      <div class="row tbl-c">
+        <div class="pblock">
+          <div class="pmain">
+            <div class="_up">
+
+              <img src="/img/logo-gold.svg">
+              <div class="box first">
+                <div class="_text">
+                  <span><a href="{{ path('app_about_us') }}">65 Years<br> of Combined Legal Experience!</a></span>
+                  <p><a href="{{ path('app_about_us') }}">about us</a></p>
+                </div>
+              </div>
+            </div>
+            <div class="_down">
+              <div class="box second">
+								<div class="back"></div>
+                <div class="_text">
+                  {% render controller("PluginsBlogBundle:Blog:blogMozaicItems", { 'catreq' : 'criminal-defense' }) %}
+                </div>
+              </div>
+              <div class="box third">
+                <div class="_text">
+                  {% render controller("PluginsNewsBundle:News:newsMozaicItems") %}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pfour">
+            {% render controller("PluginsPracticAreaBundle:PracticArea:practicMozaicItems", {
+						 	'area1' : 'criminal-defense',
+						 	'area2' : 'family-law',
+						 	'area3' : 'civil-litigation',
+						 	'area4' : 'criminal-appeals'
+						}) %}
+          </div>
+
+          <div class="pthree">
+            <div class="box first">
+							<div class="back"></div>
+              <div class="_text">
+                {% render controller("PluginsBlogBundle:Blog:blogMozaicItems", { 'catreq' : 'family-law' }) %}
+              </div>
+            </div>
+            <div class="box second">
+              <div class="_text">
+                {% render controller("PluginsBlogBundle:Blog:blogMozaicItems", { 'catreq' : 'civil-litigation' }) %}
+              </div>
+            </div>
+            <div class="box third">
+							<div class="back"></div>
+            <div class="_text">
+							{% render controller("PluginsPracticAreaBundle:PracticArea:randomArea") %}
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <div class="pbot noselect">
+    <a id="go_down" href="#psecond" class='anchor'>
+      <div class="arrow-down">
+          <img src="/img/shapeup.svg" >
+      </div>
+    </a>
+  </div>
+</section>

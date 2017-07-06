@@ -1,0 +1,9 @@
+{% if (page > 1) %}
+    {% if category is empty %}
+        <link rel="canonical" href="{{ url("plugins_blog_homepage") }}">
+    {% elseif topic is empty %}
+        <link rel="canonical" href="{{ url("plugins_blog_view_category", {'categoryUrl' : category.url}) }}">
+    {% else %}
+        <link rel="canonical" href="{{ url("plugins_blog_view_topic", {'categoryUrl' : category.url, 'topicUrl' : topic.url}) }}">
+    {% endif %}
+{% endif %}

@@ -1,0 +1,38 @@
+# auth
+_login:
+    pattern:  /admin/login
+    defaults: { _controller: AppBundle:Secured:login }
+_logout:
+    pattern:  /admin/logout
+    defaults: { _controller: AppBundle:Secured:logout }
+_security_check:
+    pattern:  /admin/security_check
+    defaults: { _controller: AppBundle:Secured:securityCheck }
+
+app_index:
+    pattern:  /
+    defaults: { _controller: AppBundle:App:index }
+
+homepage:
+    pattern:  /
+    defaults: { _controller: AppBundle:App:index }
+
+dev:
+    pattern:  /dev
+    defaults: { _controller: AppBundle:App:dev }
+
+app_about_us:
+    pattern:  /about
+    defaults: { _controller: AppBundle:App:aboutUs }
+
+app_about_attorney:
+    path:     /about/{url}
+    defaults: { _controller: AppBundle:App:attorneyView }
+
+app_contact:
+    pattern:  /contacts
+    defaults: { _controller: AppBundle:Contact:contact }
+
+app_contact_send:
+    pattern:  /ajax/contact_send
+    defaults: { _controller: AppBundle:Contact:send }

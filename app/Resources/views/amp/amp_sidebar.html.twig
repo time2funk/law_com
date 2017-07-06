@@ -1,0 +1,17 @@
+{% block ampSidebar %}
+	<amp-sidebar id="sidebar" layout="nodisplay">
+		<nav>
+			<ul>
+				<li>
+					<a href="#">
+						<amp-img src="{{ (app.request.getSchemeAndHttpHost() ~ asset("/images/logo_og.png"))}}" width="50" height="50"></amp-img>
+					</a>
+				</li>
+				<li><a href="#">Link 1</a></li>
+				<li><a href="#">Link 2</a></li>
+				<li><a href="#">Link 3</a></li>
+				<li><a href="#">Link 4</a></li>
+			</ul>
+		</nav>
+	</amp-sidebar>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% block headerMeta %}
+	<meta charset="utf-8">
+
+	<meta name="description" content="{% spaceless %}{% block meta_description %}{% endblock %}{% endspaceless %}">
+	<meta name="keywords" content="{% spaceless %}{% block meta_keywords %}{% endblock %}{% endspaceless %}">
+
+	{% render controller("AppBundle:Amp:canonicalLinkBlock", {'request' : app.request }) %}
+
+	<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+	<!-- <meta name="apple-itunes-app" content="app-id=828256236, app-argument=medium://p/9ea61abf530f">
+	<link rel="manifest" href="/amp-app-banner-manifest.json"> -->
+{% endblock %}

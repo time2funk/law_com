@@ -1,0 +1,65 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block title %}{{- page.metatitle ? page.metatitle : parent() -}}{% endblock %}
+{% block meta_keywords %}{{- page.metakeywords ? page.metakeywords : parent() -}}{% endblock %}
+{% block meta_description %}{{- page.metadescription ? page.metadescription : parent() -}}{% endblock %}
+{% block og_title %}{{- page.metatitle ? page.metatitle : parent() -}}{% endblock %}
+{% block og_descr %}{{- page.metadescription ? page.metadescription : parent() -}}{% endblock %}
+{% block last_updated_block %}{{ page.updatedAtDatetime}}{% endblock %}
+
+{% block bodyId %}blog{% endblock %}
+
+{% block content %}
+<wrapper>
+		{% render controller("PluginsNewsBundle:News:lastMozaicList") %}
+		<section id="blog" class="parent container-fluid">
+				<div class="row">
+					<div class="submenu">
+
+							<div id="side_menu">
+
+								<h2>News & Views</h2>
+								<div class="psearch">
+										<input type="text" id='search'>
+										<!-- <i class="fa fa-search" aria-hidden="true"></i> -->
+										<img class="s_pbtn" src="/img/s-icon.svg" alt="">
+								</div>
+								{# {% include "PluginsBlogBundle:Blog:search_form.html.twig" with { 'queries': queries } %} #}
+								<!-- QUERRIES!!! -->
+
+							{# {% render controller("PluginsBlogBundle:Blog:blogVerticalMenu", {categoryId: null, topicId: null, home : false, name : 'News & Vews' }) %} #}
+
+							<!-- {% include "PluginsPracticAreaBundle:PracticArea:google_map_pa.html.twig" %} -->
+						</div>
+						<div class="fb-square">{% include 'default/fb-square.html.twig' %}</div>
+				</div>
+
+
+				{% include "PluginsNewsBundle:News:show_news.html.twig" with { 'home' : false, 'element' : active}%}
+
+				{#
+				<div class="content">
+					{% include "default/breadcrumbs.html.twig" with { 'currentPage': active.name, 'elements': { 0: {'url': "plugins_news_homepage", 'name': "News & Views" }}, 'home' : false } %}
+
+
+					<div class="txt">
+						{% if active %}
+						<h1>{{ active.name }}</h1>
+						<div class="postdate">{{ active.dateUsFormat }}</div>
+						{{ active.content | raw }}
+						{% endif %}
+
+						<hr>
+						{% include "default/fb.html.twig" %}
+					</div>
+				</div>
+				#}
+
+				<div class="contactus">
+						{% include "AppBundle:Contact:contact_block_form.html.twig" %}
+						<div class="fb-square">{% include 'default/fb-square.html.twig' %}</div>
+				</div>
+					</div>
+			</section>
+	</wrapper>
+{% endblock %}

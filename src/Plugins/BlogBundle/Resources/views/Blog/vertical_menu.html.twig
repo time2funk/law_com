@@ -1,0 +1,21 @@
+{% block verticalMenu %}
+		<ul class="first">
+		{% for category in elements %}
+			{% if home == true %}
+				<li class="link two-lvl">
+					<a href="{{ path("plugins_blog_view_category", { "categoryUrl" : category.url}) }}"
+						 title="{{ category.name }}"><span>{{ category.name }}</span></a>
+				</li>
+			{% elseif home != true %}
+				{% if true %}
+				<li class="link two-lvl">
+				{% else %}
+				<li class="link two-lvl focus">
+				{% endif %}
+				<a href="{{ path("plugins_blog_view_category", { "categoryUrl" : category.url}) }}"
+					 title="{{ category.name }}"><span>{{ category.name }}</span></a>
+				</li>
+			{% endif %}
+		{% endfor %}
+		</ul>
+{% endblock %}

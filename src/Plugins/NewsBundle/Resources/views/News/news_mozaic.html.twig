@@ -1,0 +1,80 @@
+<section id='p_table'>
+
+	<div class="part f">
+
+	{% set item %}{% endset %}
+	{% set break = false %}
+	{% set type = {
+		1: 'f',
+		2: 's',
+		3: 't',
+		4: 'f',
+		5: 's',
+		6: 't',
+		7: 'fth',
+		8: 'f',
+		9: 's',
+		10: 't'
+	} %}
+	{% set mask = {
+		1: 'a',
+		2: 'b',
+		3: 'b',
+		4: 'c',
+		5: 'a',
+		6: 'a',
+		7: 'c',
+		8: 'b',
+		9: 'a',
+		10: 'b'
+	} %}
+
+
+	<!-- LOOP -->
+
+	{% for entity in news if not break %}
+
+	{% if loop.index is odd %}
+    <div class="block back {{type[loop.index]}}">
+	{% else %}
+    <div class="block {{type[loop.index]}}">
+	{% endif %}
+
+
+			<div class="mask {{mask[loop.index]}}"></div>
+			<div class="wrapper">
+				<div class="cover">
+					<a href="{{ path('plugins_news_view', {'url' : entity.url}) }}" title="{{ entity.name }}">
+						<h3>{{ entity.name }}</h3>
+						{% if mask[loop.index] == 'a' %}
+						<span class="link">
+						{% else %}
+						<span class="link_gray">
+						{% endif %}
+							read more
+						</span>
+					</a>
+				</div>
+			</div>
+		</div>
+
+	{% if loop.index == 3 %}
+	</div>
+
+	<div class="part s">
+	{% endif %}
+	{% if loop.index == 7 %}
+	</div>
+
+	<div class="part t">
+	{% endif %}
+	{% if loop.index == 10 %}
+		{% set break = true %}
+	{% endif %}
+	{% endfor %}
+
+	<!-- END LOOP -->
+
+	</div>
+
+</section>

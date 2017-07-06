@@ -1,0 +1,8 @@
+{% block additionalDescription %}
+    <div class="clear"></div>
+    {% block barAssociationsBlock %}
+    <section class="bar-association-section short">
+        {% render controller("AppBundle:App:barAssociationBlock") %}
+    </section>
+    {% endblock %}
+{% endblock %}

@@ -1,0 +1,18 @@
+{% block breadcrumbsSection %}
+<div class="crumbs">
+		{% if elements is defined %}
+				{% for element in elements %}
+						{% if not element.params is defined %}
+								{% set params = {} %}
+						{% else %}
+								{% set params = element.params %}
+						{% endif %}
+						<a href="{{ path(element.url, params) }}" title="{{ element.name }}"><span>{{ element.name }}</span></a>
+						<img src="/img/grey.svg">
+				{% endfor %}
+		{% endif %}
+		{% if home != true %}
+		<span class="hl">{{ currentPage }}</span>
+		{% endif %}
+</div>
+{% endblock %}

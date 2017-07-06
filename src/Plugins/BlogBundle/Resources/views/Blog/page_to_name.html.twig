@@ -1,0 +1,9 @@
+{% block pageToName %}
+	{% spaceless %}
+    {% if (pages > 1) %}
+      {% if (page != 1) %}
+        {{ page }}
+      {% endif %}
+    {% endif %}
+	{% endspaceless %}
+{% endblock %}

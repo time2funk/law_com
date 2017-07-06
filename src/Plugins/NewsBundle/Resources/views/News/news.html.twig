@@ -1,0 +1,86 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block title %}{{- content.metatitle ? content.metatitle : parent() -}}{% include "PluginsNewsBundle:News:page_to_meta_news.html.twig" with {'pages': pages, 'page': page} %}{% endblock %}
+{% block meta_keywords %}{{- content.metakeywords ? content.metakeywords : parent() -}}{% endblock %}
+{% block meta_description %}{{- content.metadescription ? content.metadescription : parent() -}}{% include "PluginsBlogBundle:Blog:page_to_meta.html.twig" with {'pages': pages, 'page': page} %}{% endblock %}
+{% block og_title %}{{- content.metatitle ? content.metatitle : parent() -}}{% include "PluginsBlogBundle:Blog:page_to_meta.html.twig" with {'pages': pages, 'page': page} %}{% endblock %}
+{% block og_descr %}{{- content.metadescription ? content.metadescription : parent() -}}{% endblock %}
+{% block last_updated_block %}{{ content.updatedAtDatetime}}{% endblock %}
+
+{% block canonicalLinkBlock %}
+{# include "default/canonical.html.twig" #}
+{% endblock %}
+
+{% block bodyId %}news{% endblock %}
+{% block bodyClass %}news{% endblock %}
+
+{% block content %}
+<wrapper>
+
+		{#
+			{% include "PluginsNewsBundle:News:news_mozaic.html.twig" with { 'elements' : elements}%}
+		#}
+
+		{% render controller("PluginsNewsBundle:News:lastMozaicList") %}
+
+		<section id="blog" class="parent container-fluid">
+				<div class="row">
+						<div class="submenu">
+
+							<div id="side_menu">
+
+								<h2>News & Views</h2>
+								<div class="psearch">
+										<input type="text" id='search'>
+										<!-- <i class="fa fa-search" aria-hidden="true"></i> -->
+										<img class="s_pbtn" src="/img/s-icon.svg" alt="">
+								</div>
+
+								{# {% include "PluginsBlogBundle:Blog:search_form.html.twig" with { 'queries': queries } %} #}
+								<!-- QUERRIES!!! -->
+
+								{# {% render controller("PluginsBlogBundle:Blog:blogVerticalMenu", {categoryId: null, topicId: null, home : false, name : 'News & Vews' }) %} #}
+
+							</div>
+							<div class="fb-square">{% include 'default/fb-square.html.twig' %}</div>
+						</div>
+
+
+						{% include "PluginsNewsBundle:News:show_news.html.twig" with { 'home' : true, 'elements' : elements}%}
+{#
+						<div class="content">
+							{% include "default/breadcrumbs.html.twig" with { 'currentPage': 'News & Views', 'elements': {
+											0: {'url': "plugins_news_homepage", 'name': "News & Views" }
+									}, 'home' : true } %}
+							<div class="list">
+								<ul>
+									{% for entity in elements %}
+									<li class="item">
+										<a href="{{ path('plugins_news_view', {'url' : entity.url}) }}" title="{{ entity.name }}"><h3>{{ entity.name }}</h3></a>
+										<div class="short">
+											{{ entity.short | raw }}
+										</div>
+										<hr>
+										<div class="info">
+											<div class="row">
+												<div class="dc">
+													<div class="pattr"><span>date:</span>{{ entity.dateUsFormat }}</div>
+												</div>
+												<div class="readmore"><a href="{{ path('plugins_news_view', {'url' : entity.url}) }}"><span class="pbtn">read more</span></a></div>
+											</div>
+										</div>
+									</li>
+									{% endfor %}
+								</ul>
+								</div>
+						</div>
+#}
+
+						<div class="contactus">
+								{% include "AppBundle:Contact:contact_block_form.html.twig" %}
+								<div class="fb-square">{% include 'default/fb-square.html.twig' %}</div>
+						</div>
+				</div>
+		</section>
+</wrapper>
+{% endblock %}

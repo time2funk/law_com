@@ -1,0 +1,15 @@
+{% block topSection %}
+	<div class="headings">
+		<div class="title-box">
+			<h1>{{ section_name }}</h1>
+			{% if section_desc is defined and not section_desc is empty %}
+			<div class="short">{{ section_desc }}</div>
+			{% endif %}
+		</div>
+		{% if backgroundImage is defined %}
+			<img src="{{ backgroundImage }}" alt="Sharova Law Firm">
+		{% else %}
+			<img src="../../../../../../img/29_CYBER CRIMES.jpg" alt="Sharova Law Firm">
+		{% endif %}
+	</div>
+{% endblock %}

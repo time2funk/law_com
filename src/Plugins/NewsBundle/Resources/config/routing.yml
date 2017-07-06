@@ -1,0 +1,13 @@
+plugins_news_homepage:
+    path:     /{page}
+    defaults: { _controller: PluginsNewsBundle:News:news, page: 1 }
+    requirements:
+        page:  \d+
+
+plugins_news_view:
+    path:     /{url}
+    defaults: { _controller: PluginsNewsBundle:News:view }
+
+news_ajax_search:
+    pattern:  /
+    defaults: { _controller: PluginsNewsBundle:News:newsPost }

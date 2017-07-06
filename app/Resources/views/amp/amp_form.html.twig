@@ -1,0 +1,43 @@
+{% block ampForm %}
+	<div class="free-case-form">
+		<h2 class="form-title">
+			Free Case Evaluation
+		</h2>
+		<form method="post"
+				action-xhr="https://ampbyexample.com/components/amp-form/submit-form-input-text-xhr"
+				target="_top">
+			<input type="text"
+					class="data-input"
+					name="name"
+					placeholder="Name..."
+					required>
+			<input type="email"
+					class="data-input"
+					name="email"
+					placeholder="Email..."
+					required>
+			<input type="tel"
+					class="data-input"
+					name="tel"
+					placeholder="Telephone..."
+					required>
+			<input type="text"
+	        class="data-input"
+	        placeholder="Tell us about your case..."
+					required>
+			<input type="submit"
+					value="Submit"
+					class="button button-primary">
+			<div submit-success>
+				<template type="amp-mustache">
+					Success! Thank You!
+				</template>
+			</div>
+			<div submit-error>
+				<template type="amp-mustache">
+					Error! Please enter correct information
+				</template>
+			</div>
+		</form>
+	</div>
+{% endblock %}

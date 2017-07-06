@@ -1,0 +1,101 @@
+{% block footerContent %}
+    <footer>
+				{% include "default/uptotop.html.twig" %}
+		    <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress" class="address">
+            <div class="txt-cent container">
+								{% if home %}
+                	{% include "default/hidecontent.html.twig" %}
+								{% endif %}
+
+							<div class="row">
+                <div class="side a">
+                    <img id='big' src="{{ asset("/img/logo_footer.svg") }}" alt="Sharova Law Firm">
+										<img id='wide' src="{{ asset("/img/logo.png") }}" alt="Sharova Law Firm">
+                </div>
+                <div class="side b">
+                    <div class="pcol a">
+                        <h4>
+                            <a href="index.html">home</a>
+                        </h4>
+                        <ul>
+                            <li>
+                                <a href="{{ path('app_about_us') }}" title="about us">about us</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('plugins_practic_area_homepage') }}" title="practic areas">Practice areas</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('plugins_blog_homepage') }}" title="blog">blog</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('plugins_news_homepage') }}" title="news & views">new & views</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_contact') }}" title="contact us">contact us</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="pcol b">
+                        <h4>contact us</h4>
+                        <ul>
+                            <li>phone:</li>
+                            <li>{{ contact_phone }}</li>
+                            <li>Fax:</li>
+                            <li>{{ contact_fax }}</li>
+                        </ul>
+                    </div>
+                    <div class="pcol c">
+                        <h4>Info</h4>
+                        <ul>
+                            <li itemprop="streetAddress">{{ contact_address_part1 }}</li>
+                            <li>{{ contact_address_part2 }}</li>
+                            <li>
+                                <span itemprop="postalCode">{{ contact_zip1 | raw}}</span>
+                                <span itemprop="addressLocality">{{ contact_address_city | raw}}</span>
+                            </li>
+                            <li>
+                                <a class="mail" href="mailto:{{ contact_email1 }}?subject=From Web Page">
+                                    <span itemprop="email">{{ contact_email1 }}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="pcol d">
+                        <h4>follow us</h4>
+                        <ul>
+                            <li>
+                                <a href="">
+                                    <i class="fa fa-facebook" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+							</div>
+            </div>
+            <div class="bot">
+                <p class="ptext">
+                    <span itemprop="name">{{ contact_office | raw }}</span>
+                    © 2017 - Practice in
+                    <span itemprop="addressRegion">{{ contact_state1 | raw}}</span>
+                    and New Jersey
+                </p>
+								<p class="starttext">
+									* The information on this website is for general information purposes only. Nothing on this site should be taken as legal advice for any individual case or situation.<br />
+									This information is not intended to create, and receipt or viewing does not constitute, an attorney-client relationship.
+                </p>
+                <meta itemprop="url" content="https://www.sharovalaw.com/">
+            </div>
+		    </span>
+		</footer>
+{% endblock %}

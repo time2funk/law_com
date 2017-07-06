@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html amp lang="en">
+	<head>
+		{% include "amp/amp_head_meta.html.twig" %}
+		{% include "amp/amp_scripts.html.twig" %}
+		{% include "amp/amp_custom.html.twig" %}
+
+	  {% spaceless %}<title>{% block title %}Law office of Yelena Sharova{% endblock %}</title>{% endspaceless %}
+
+	  {# {% include "amp/amp_json_ld.html.twig" %} #}
+
+		{% include "amp/amp_boilerplate.html.twig" %}
+	</head>
+	<body>
+	    {% block body %}{% endblock %}
+	</body>
+</html>

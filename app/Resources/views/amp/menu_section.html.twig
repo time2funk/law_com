@@ -1,0 +1,14 @@
+{% block menuSection %}
+	{% include "default/amp_breadcrumbs.html.twig" with {
+		'elements': {
+					0: {
+						'url': "plugins_practic_area_homepage", 'name': "Practice areas"
+						},
+					1: {
+						'url': "plugins_practic_area_view", 'name': practicArea.name, "params" : {
+							"url" : practicArea.url
+							}
+						}
+			}, 'currentPage': active.name }
+	%}
+{% endblock %}

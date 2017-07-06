@@ -1,0 +1,284 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block title %}{{- page.metatitle ? page.metatitle : parent() -}}{% endblock %}
+{% block meta_keywords %}{{- page.metakeywords ? page.metakeywords : parent() -}}{% endblock %}
+{% block meta_description %}{{- page.metadescription ? page.metadescription : parent() -}}{% endblock %}
+{% block og_title %}{{- page.metatitle ? page.metatitle : parent() -}}{% endblock %}
+{% block og_descr %}{{- page.metadescription ? page.metadescription : parent() -}}{% endblock %}
+{% block last_updated_block %}{{ page.updatedAtDatetime }}{% endblock %}
+
+{% block bodyId %}about{% endblock %}
+
+{% block content %}
+{% include "AppBundle:App:tmate.list.menu.html.twig" with {'back': 'app_about_us'} %}
+
+<wrapper>
+  <section id="personal-info">
+    <div class="container">
+      <div class="side a">
+        <div id="persona-front">
+          <img src="/img/persona/persona.png"  alt="{{ attorney.name }}">
+          {#
+          <img src="{{ asset(attorney.photoFullPath) }}" alt="{{ attorney.name }}">
+          #}
+        </div>
+        <div class="statistic">
+          <ul>
+            <li>
+              <span>233</span>
+              <h5>Completed Casess</h5>
+            </li>
+            <li>
+              <span>33</span>
+              <h5>Years of practice</h5>
+            </li>
+            <li>
+              <span>97%</span>
+              <h5>wining rate</h5>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="side b">
+
+  			{% include "default/breadcrumbs.html.twig" with { 'elements': { 0: {'url': "app_about_us", 'name': "About us" }}, 'currentPage': attorney.name, 'home' : false } %}
+
+        <h2>{{ attorney.name }}</h2>
+        <h4>type something</h4>
+
+        {% include "default/social_block.html.twig" %}
+        {{ attorney.description | raw }}
+
+      </div>
+    </div>
+  </section>
+
+  <section id="team-show">
+    <div class="container">
+      <div class="_text">
+        <h2>our team</h2>
+      </div>
+      <!-- <div class="pslider">
+        <ul class='slides a'>
+          <li class='cur'>
+
+          </li>
+          <li>
+
+          </li>
+        </ul>
+        <div class="cntrls noselect">
+          <a href="javascript:void(0);"><div class="prev cntrl"></div></a>
+          <a href="javascript:void(0);"><div class="next cntrl"></div></a>
+        </div>
+      </div> -->
+
+      <ul class='team'>
+        {#
+        {% for teammate in attorneys %}
+        <li>
+          <a href="{{ teammate.url }}"><img src="{{ asset(teammate.photoFullPath) }}"></a>
+          <div class="block">
+            <h3>{{ teammate.name }}</h3>
+            <div class="info-block">
+              <h4>Type something</h4>
+              <p>
+                People like a “special” price or exclusive offer directed
+              </p>
+            </div>
+            <div class="stat-block">
+              <h4><a href="{{ teammate.url }}">Click to discover</a></h4>
+              <div class="statistic">
+                <ul>
+                  <li>
+                    <span>233</span>
+                    <h5>Completed Casess</h5>
+                  </li>
+                  <li>
+                    <span>33</span>
+                    <h5>Years of practice</h5>
+                  </li>
+                  <li>
+                    <span>97%</span>
+                    <h5>wining rate</h5>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+      {% endfor %}
+      #}
+        <li>
+          <a href="#"><img src="/img/persona/per-w.png"></a>
+          <div class="block">
+            <h3>Nettie Norton</h3>
+            <div class="info-block">
+              <h4>Type something</h4>
+              <p>
+                People like a “special” price or exclusive offer directed
+              </p>
+            </div>
+            <div class="stat-block">
+              <h4><a href="">Click to discover</a></h4>
+              <div class="statistic">
+                <ul>
+                  <li>
+                    <span>233</span>
+                    <h5>Completed Casess</h5>
+                  </li>
+                  <li>
+                    <span>33</span>
+                    <h5>Years of practice</h5>
+                  </li>
+                  <li>
+                    <span>97%</span>
+                    <h5>wining rate</h5>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <a href="#"><img src="/img/persona/per-m.png"></a>
+          <div class="block">
+            <h3>Henry Harper</h3>
+            <div class="info-block">
+              <h4>Type something</h4>
+              <p>
+                People like a “special” price or exclusive offer directed
+              </p>
+            </div>
+            <div class="stat-block">
+              <h4><a href="">Click to discover</a></h4>
+              <div class="statistic">
+                <ul>
+                  <li>
+                    <span>233</span>
+                    <h5>Completed Casess</h5>
+                  </li>
+                  <li>
+                    <span>33</span>
+                    <h5>Years of practice</h5>
+                  </li>
+                  <li>
+                    <span>97%</span>
+                    <h5>wining rate</h5>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <a href="#"><img src="/img/persona/per-w.png"></a>
+          <div class="block">
+            <h3>Nettie Norton</h3>
+            <div class="info-block">
+              <h4>Type something</h4>
+              <p>
+                People like a “special” price or exclusive offer directed
+              </p>
+            </div>
+            <div class="stat-block">
+              <h4><a href="">Click to discover</a></h4>
+              <div class="statistic">
+                <ul>
+                  <li>
+                    <span>233</span>
+                    <h5>Completed Casess</h5>
+                  </li>
+                  <li>
+                    <span>33</span>
+                    <h5>Years of practice</h5>
+                  </li>
+                  <li>
+                    <span>97%</span>
+                    <h5>wining rate</h5>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <a href="#"><img src="/img/persona/per-n.svg"></a>
+          <div class="block">
+            <h3>Nettie Norton</h3>
+            <div class="info-block">
+              <h4>Type something</h4>
+              <p>
+                People like a “special” price or exclusive offer directed
+              </p>
+            </div>
+            <div class="stat-block">
+              <h4><a href="">Click to discover</a></h4>
+              <div class="statistic">
+                <ul>
+                  <li>
+                    <span>233</span>
+                    <h5>Completed Casess</h5>
+                  </li>
+                  <li>
+                    <span>33</span>
+                    <h5>Years of practice</h5>
+                  </li>
+                  <li>
+                    <span>97%</span>
+                    <h5>wining rate</h5>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+
+  </section>
+  <section id="contact-baner">
+    <div class="back">
+      <div class="cover"></div>
+    </div>
+      <div class="container">
+        <div class="side a">
+          <a href="app_dev.php"><img src="/img/lgog.svg"></a>
+          <h3>
+            Working In Your <br>
+            Best Interests Every <br>
+            Step Of The Way
+          </h3>
+        </div>
+        <div class="side b">
+      				{% include "AppBundle:Contact:contact_block_form.html.twig" %}
+          <!-- <div id="contactus">
+            <h2>Contact us now</h2>
+            <p>Leave your message in the form below</p>
+            <form action="">
+              <div class="form-data">
+                <lable class='action'>name</lable>
+                <input type="text" name='name'>
+              </div>
+              <div class="form-data input">
+                <lable class='action'>email</lable>
+                <input type="text" name='name'>
+              </div>
+              <div class="form-data input">
+                <lable class='action'>phone</lable>
+                <input type="text" name='name'>
+              </div>
+              <div class="form-data">
+                <lable>message</lable>
+                <textarea name="msg" placeholder='Tell us about your case'></textarea>
+              </div>
+
+              <a href=""><div class="pbtn">contact us</div></a>
+            </form>
+          </div> -->
+        </div>
+      </div>
+  </section>
+</wrapper>
+{% endblock %}

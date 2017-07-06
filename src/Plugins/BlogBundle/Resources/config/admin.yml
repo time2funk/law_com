@@ -1,0 +1,29 @@
+services:
+    sonata.admin.blog_category:
+        class: Plugins\BlogBundle\Admin\BlogCategoryAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Blog", label: "Category" }
+        arguments:
+            - ~
+            - Plugins\BlogBundle\Entity\BlogCategory
+            - ~
+
+    sonata.admin.blog_topic:
+        class: Plugins\BlogBundle\Admin\BlogTopicAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Blog", label: "Topic" }
+        arguments:
+            - ~
+            - Plugins\BlogBundle\Entity\BlogTopic
+            - ~
+
+    sonata.admin.blog_post:
+        class: Plugins\BlogBundle\Admin\BlogPostAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Blog", label: "Post" }
+        arguments:
+            - ~
+            - Plugins\BlogBundle\Entity\BlogPost
+            - PluginsBlogBundle:BlogAdmin
+        calls:
+          - [ setTemplate, [edit, PluginsBlogBundle:Admin:base_edit.html.twig]]

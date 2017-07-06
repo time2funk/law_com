@@ -1,0 +1,27 @@
+{% block headerContent %}
+	<header>
+		<button on="tap:sidebar.toggle" class="menu" title="Toggle Sidebar" >
+			☰ <span id="resp-menu-word">MENU</span>
+		</button>
+		<div class="call-us">
+			<a href="tel:+1-{{contact_phone}}">{{contact_phone_header}}</a>
+		</div>
+	</header>
+	<div class="static-header">
+		<div class="col logo-col logo">
+			<a href="#">
+				<amp-img
+					src="{{ (app.request.getSchemeAndHttpHost() ~ asset("/images/logo_hor.png"))}}"
+					width="186"
+					height="54"
+					layout="responsive">
+				</amp-img>
+			</a>
+		</div>
+		<div class="col address">
+			Law Office of Yelena Sharova, P.C.<br>
+			745 Fifth Avenue, Suite 500 <br>
+			New York, New York 10151
+		</div>
+	</div>
+{% endblock %}

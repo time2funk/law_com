@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        {% spaceless %}<title>{% block title %}Law office of Yelena Sharova{% endblock %}</title>{% endspaceless %}
+        <meta name="description" content="{% spaceless %}{% block meta_description %}{% endblock %}{% endspaceless %}">
+        <meta name="keywords" content="{% spaceless %}{% block meta_keywords %}{% endblock %}{% endspaceless %}">
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        {% stylesheets
+                        'css/font-awesome.min.css'
+                        'styles/jquery.popup.css'
+												'css/style.css'
+                filter='yui_css' %}
+           <link rel="stylesheet" type="text/css" href="{{ asset_url }}">
+        {% endstylesheets %}
+        {% javascripts 'scripts/libs/jquery-1.11.3.min.js' %}
+
+
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+
+        {% block ampLinkBlock %}
+            {% render controller("AppBundle:Amp:ampLinkBlock", {'request' : app.request }) %}
+        {% endblock %}
+
+        {% block canonicalLinkBlock %}
+        {% endblock %}
+
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <meta property="og:url"           content="{{ (app.request.attributes.get('_route') ?
+                    url(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')):
+                    url('homepage')) | replace({'http://' : 'https://'}) }}" />
+        <meta property="og:type"          content="website" />
+        <meta property="og:title"         content="{% spaceless %}{% block og_title %}{% endblock %}{% endspaceless %}" />
+        <meta property="og:description"   content="{% spaceless %}{% block og_descr %}{% endblock %}{% endspaceless %}" />
+        <meta property="og:image"         content="{{ (app.request.getSchemeAndHttpHost() ~ asset("/images/logo_og.png")) | replace({'http://' : 'https://'})}}" />
+
+				<link rel="stylesheet" href="/css/sass.css">
+
+    </head>
+    <body id="{% block bodyId %}body-block{% endblock %}" class="{% block bodyClass %}{% endblock %}">
+        <article itemscope itemtype="http://schema.org/LocalBusiness">
+				<meta itemprop="name" content="Law Office Of Yelena Sharova">
+            {% block body %}{% endblock %}
+        </article>
+        {% block javascripts %}
+            {#<script src="http://maps.googleapis.com/maps/api/js" async></script>#}
+
+            {% javascripts
+                        'js/jquery.js'
+                        'scripts/libs/jquery.validate.js'
+                        'scripts/libs/jquery.popup.js'
+            %}
+                <script type="text/javascript" src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+            {% javascripts
+                        'scripts/Popup.js'
+                        'scripts/Validate.js'
+                        'scripts/Form.js'
+                        'js/bootstrap.js'
+            %}
+                <script type="text/javascript" src="{{ asset_url }}" async></script>
+            {% endjavascripts %}
+            {% javascripts
+                        'js/jquery.js'
+                        'js/bootstrap.min.js'
+
+												'js/script.js'
+            %}
+                <script type="text/javascript" src="{{ asset_url }}" async></script>
+            {% endjavascripts %}
+        {% endblock %}
+        <script type="text/javascript">
+            $(function(){
+                // btn карта сайта
+                $('#smap').click(function(){
+                    var block = $(".phidden");
+                    block.slideToggle('slow');
+                });
+                //магнит для меню
+                // var stickyHeaderTop = $('#pheader').offset().top;
+
+                $(window).scroll(function(){
+                    if( $(window).scrollTop() > 0 )
+                        $('#pheader').addClass("fix");
+                    else
+                        $('#pheader').removeClass("fix");
+                });
+            });
+        </script>
+        <script async>
+          window.fbAsyncInit = function() {
+            FB.init({
+              appId      : '1061690967254744',
+              xfbml      : true,
+              version    : 'v2.7'
+            });
+          };
+
+          (function(d, s, id){
+             var js, fjs = d.getElementsByTagName(s)[0];
+             if (d.getElementById(id)) {return;}
+             js = d.createElement(s); js.id = id;
+             js.src = "//connect.facebook.net/en_US/sdk.js";
+             fjs.parentNode.insertBefore(js, fjs);
+           }(document, 'script', 'facebook-jssdk'));
+          </script>
+          <div id="fb-root"></div>
+          <script >
+            (function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) return;
+              js = d.createElement(s); js.id = id;
+              js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7&appId=1061690967254744";
+              fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+          </script>
+    </body>
+</html>

@@ -1,0 +1,33 @@
+pa_ajax_search:
+    pattern:  /
+    defaults: { _controller: PluginsPracticAreaBundle:PracticArea:paPost }
+    requirements:
+      _method:  POST
+
+amp__plugins_practic_area_homepage:
+    path:     /amp/{trailingSlash}
+    defaults: { _controller: PluginsPracticAreaBundle:PracticArea:index, trailingSlash : "/" }
+    requirements:
+        trailingSlash:  "[/]{0,1}"
+
+amp__plugins_practic_area_view:
+    path:     /amp/{url}
+    defaults: { _controller: PluginsPracticAreaBundle:PracticArea:view }
+
+amp__plugins_practic_area_subsection_view:
+    path:     /amp/{urlSection}/{url}
+    defaults: { _controller: PluginsPracticAreaBundle:PracticArea:viewSubSection }
+
+plugins_practic_area_homepage:
+    path:     /{trailingSlash}
+    defaults: { _controller: PluginsPracticAreaBundle:PracticArea:index, trailingSlash : "/" }
+    requirements:
+        trailingSlash:  "[/]{0,1}"
+
+plugins_practic_area_view:
+    path:     /{url}
+    defaults: { _controller: PluginsPracticAreaBundle:PracticArea:view }
+
+plugins_practic_area_subsection_view:
+    path:     /{urlSection}/{url}
+    defaults: { _controller: PluginsPracticAreaBundle:PracticArea:viewSubSection }

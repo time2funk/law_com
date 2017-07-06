@@ -1,0 +1,32 @@
+{% block avvo %}
+<div class="avvo-row">
+    {% if name == 'Family law' %}
+        <div class="avvo_badge">
+		        <div class="avvo_content">
+		            <img class="avvo_img" src="/images/avvo/avvo01.png" alt="Top Divorce Attorney Yelena Sharova">
+		        </div>
+		    </div>
+
+		    <div class="avvo_badge">
+		        <div class="avvo_content">
+		            <img class="avvo_img" src="/images/avvo/avvo05.png" alt="Top Divorce Lawyer New York">
+		        </div>
+		    </div>
+    {% endif %}
+
+    {% if name == 'Criminal defense' %}
+    <div class="avvo_badge">
+        <div class="avvo_content">
+            <img class="avvo_img" src="/images/avvo/avvo02.png" alt="Top Criminal Defense Attorney Yelena Sharova">
+        </div>
+    </div>
+
+    <div class="avvo_badge">
+        <div class="avvo_content">
+            <img class="avvo_img" src="/images/avvo/avvo06.png" alt="Top Criminal Defense Lawyer New York">
+        </div>
+    </div>
+    {% endif %}
+    <div class="clear"></div>
+</div>
+{% endblock %}

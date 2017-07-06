@@ -1,0 +1,7 @@
+{% set chosen = random(rand|length) %}
+{% for item in rand %}
+    {% if loop.index == chosen %}
+			<span><a href="{{ path("plugins_practic_area_view", { "url" : item.url }) }}" title="practice areas">{{item.name}}</a></span>
+			<p><a href="{{ path("plugins_practic_area_view", { "url" : item.url }) }}" title="practice areas">practice areas</a></p>
+		{% endif %}
+{% endfor %}

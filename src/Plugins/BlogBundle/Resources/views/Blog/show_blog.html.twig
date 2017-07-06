@@ -1,0 +1,219 @@
+<style>
+    #blog-filtered{
+      display: none;
+    }
+</style>
+
+<div class="content">
+  <div  id='static-show'>
+<!-- _________________ -->
+  {% if category is empty %}
+      {% if queries is empty %}
+          {% include "default/breadcrumbs.html.twig" with { 'currentPage': 'Blog', 'elements': null, 'home' : false } %}
+      {% else %}
+          {% include "default/breadcrumbs.html.twig" with { 'currentPage': queries, 'elements':
+              {
+                  0: {'url': "plugins_blog_homepage", 'name': "Blog" },
+              }, 'home' : false
+          } %}
+      {% endif %}
+
+      <!-- <h1 id="blog-h1">Blog {% include "PluginsBlogBundle:Blog:page_to_name.html.twig" with {'pages': pages, 'page': page} %}</h1> -->
+
+  {% elseif topic is empty %}
+      {% include "default/breadcrumbs.html.twig" with { 'currentPage': category.name, 'elements':
+              {
+                  0: {'url': "plugins_blog_homepage", 'name': "Blog" },
+              }, 'home' : false
+          } %}
+      <!-- <h1 id="blog-h1">{% include "PluginsBlogBundle:Blog:cat_name.html.twig" with { 'currentPage': category.name } %}</h1> -->
+  {% else %}
+      {% include "default/breadcrumbs.html.twig" with { 'currentPage': topic.name, 'elements':
+              {
+                  0: {'url': "plugins_blog_homepage", 'name': "Blog" },
+                  1: {'url': "plugins_blog_view_category", 'name': category.name, 'params': {'categoryUrl' : category.url}},
+              }, 'home' : false
+          } %}
+      {% include "PluginsBlogBundle:Blog:cat_name.html.twig" with { 'currentPage': category.name, 'elements':
+              {
+                  0: {'url': "plugins_blog_homepage", 'name': "Blog" },
+              }
+      } %}
+      <!-- <h1 id="blog-h1">{% include "PluginsBlogBundle:Blog:cat_name.html.twig" with { 'currentPage': category.name } %}</h1> -->
+  {% endif %}
+
+    <div class="list">
+
+    {% if category is empty %}
+
+    {% set previews = {
+            0: "Criminal defense",
+            1: "Family law",
+            2: "Civil litigation"
+    } %}
+
+    {% if posts is empty %}
+        <div class="blog-subtitle">No posts found</div>
+    {% else %}
+      {% set break = false %}
+        {% for step in 0..2 %}
+          <div class="blog-subtitle">
+            {{previews[step]}} latest posts
+          </div>
+          {% set break = false %}
+          {% set count = 0 %}
+          <ul>
+            {% for post in allposts if not break %}
+              {% if post.blogTopic is empty %}
+                  {% set postUrl = path("plugins_blog_view_post_without_topic", {categoryUrl: post.blogCategory.url, id: post.id, postUrl: post.url}) %}
+              {% else %}
+                  {% set postUrl = path("plugins_blog_view_post", {categoryUrl: post.blogCategory.url, topicUrl: post.blogTopic.url, id: post.id, postUrl: post.url}) %}
+              {% endif %}
+              {% if post.blogCategory.name == previews[step] %}
+                  <li class="item">
+                    <a href="{{ postUrl }}" title="{{ post.name }}"><h3>{{ post.name }}</h3></a>
+                    <div class="short">
+                      {{ post.short | raw }}
+                    </div>
+                    <hr>
+                    <div class="info">
+                      <div class="row">
+                        <div class="dc">
+                          <div class="pattr"><span>date:</span>{{ post.dateUsFormat }}</div>
+                          <div class="pattr"><span>category:</span>{{ post.blogCategory.name }}</div>
+                        </div>
+                        <div class="readmore"><a href="{{ postUrl }}"><span class="pbtn">read more</span></a></div>
+                      </div>
+                    </div>
+                  </li>
+                  {% set count = count + 1 %}
+                  {% if count == 5 %}
+                    {% set break = true %}
+                  {% endif %}
+              {% endif %}
+            {% endfor %}
+          </ul>
+        {% endfor %}
+    {% endif %}
+
+    {% else %}
+
+      {% if posts is empty %}
+        <div class="blog-subtitle">No posts found</div>
+      {% else %}
+        <ul>
+        {% for post in posts %}
+            {% if post.blogTopic is empty %}
+              {% set postUrl = path("plugins_blog_view_post_without_topic", {categoryUrl: post.blogCategory.url, id: post.id, postUrl: post.url}) %}
+            {% else %}
+              {% set postUrl = path("plugins_blog_view_post", {categoryUrl: post.blogCategory.url, topicUrl: post.blogTopic.url, id: post.id, postUrl: post.url}) %}
+            {% endif %}
+            <li class="item">
+              <a href="{{ postUrl }}" title="{{ post.name }}"><h3>{{ post.name }}</h3></a>
+              <div class="short">
+                {{ post.short | raw }}
+              </div>
+              <hr>
+              <div class="info">
+                <div class="row">
+                  <div class="dc">
+                    <div class="pattr"><span>date:</span>{{ post.dateUsFormat }}</div>
+                    <div class="pattr"><span>category:</span>{{ post.blogCategory.name }}</div>
+                  </div>
+                  <div class="readmore"><a href="{{ postUrl }}"><span class="pbtn">read more</span></a></div>
+                </div>
+              </div>
+            </li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+
+    {% endif %}
+
+    {% if category is not empty %}
+
+    {% set params = null %}
+    {% if queries %}
+        {% set params = {'q' : queries|url_encode} %}
+    {% endif %}
+    {% include "AppBundle:App:pagination.html.twig" with {'pages': pages, 'page': page, 'params': parameters, 'queries': params, 'route': route, 'limit': null} %}
+    {% endif %}
+    </div>
+
+<!-- _________________ -->
+  </div>
+<!-- _________________ -->
+    <div class="list" id="blog-filtered">
+      <ul id='search_show'>
+      </ul>
+    </div>
+<!-- _________________ -->
+</div>
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+      var searchRequest = null;
+      $("#search").val('');
+
+      console.log('search');
+
+      $("#search").on('keyup',function() {
+
+          var that = this;
+          var value = $(this).val();
+
+          var entitySelector = $("#search_show").html('');
+          if ( $(this).val().length > 0 ) {
+              if (searchRequest != null)
+                  searchRequest.abort();
+              $('#search_show').empty()
+
+              $.ajax({
+                  type: "POST",
+                  url: "{{ path('blog_ajax_search') }}",
+                  data: {
+                      'searchText' : value
+                  },
+                  success: function(msg){
+                    console.log('responce');
+                    console.log(msg);
+
+                    if (value==$(that).val()) {
+                        var result = JSON.parse(msg);
+                        console.log(result);
+
+                        $('#static-show').slideUp("fast");
+                        var content = '';
+                        if(result.length == 0){
+                          content += '<li>no result...</li>';
+                        }else{
+                          for(var i=0; i < result.length; i++){
+                            content +=
+                            '<li class="item">'+
+                              '<a href="/blog/'+
+                              result[i]['short_home']+
+                              '/'+
+                              result[i]['id']+
+                              '-'+
+                              result[i]['url']+
+                              '"title="'+
+                              result[i]['name']+'">'+
+                              '<h3>'+result[i]['name']+'</h3>'+
+                              '</a>'+
+                              '<hr>'+
+                            '</li>';
+                          }
+                        }
+                        $('#search_show').append(content);
+                        $('#blog-filtered').slideDown('fast');
+                      }
+                   }
+              });
+          }// if( $(this).val().length > 0 )
+          else{
+            $('#blog-filtered').slideUp('fast');
+            $('#static-show').slideDown('fast');
+          }
+        });// #search on 'keyup'
+    });
+</script>

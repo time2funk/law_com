@@ -1,0 +1,32 @@
+{% block paBlocks %}
+{% set count = {
+		1: 'a',
+		2: 'b',
+		3: 'c',
+		4: 'd',
+		5: 'e'
+} %}
+<div id="pa_blocks" class="row">
+	{% for item in areasShort %}
+
+	<div class="block {{count[loop.index]}}">
+		
+		{% if item.practicArea is defined %}
+			<a href="{{ path("plugins_practic_area_subsection_view", {
+			 "urlSection" : item.practicArea.url,
+			 "url" : item.url }) }}">
+		{% else %}
+			<a href="{{ path("plugins_practic_area_view", { "url" : item.url }) }}">
+		{% endif %}
+
+				<img src="/img/pa_{{count[loop.index]}}.svg">
+				<h3>{{item.name}}</h3>
+				<span>LEARN MORE</span>
+			</a>
+	</div>
+
+
+	{% endfor %}
+</div>
+
+{% endblock %}

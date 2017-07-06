@@ -1,0 +1,26 @@
+{% for item in news %}
+	{% set x = 0 %}
+	{% set break = false %}
+	{% set name %}{% endset %}
+	{% set text = item.name | split(' ') %}
+
+	<span>
+		<a href="{{ path('plugins_news_view', {'url' : item.url}) }}">
+
+			{% for t in text if not break %}
+				{% set x = (x + t|length) %}
+				{% if (x) < 38 %}
+					{{t}}
+				{% else %}
+				...
+					{% set break = true %}
+				{% endif %}
+			{% endfor %}
+
+		</a>
+	</span>
+
+
+	<p><a href="{{ path('plugins_news_view', {'url' : item.url}) }}" title="news & views">news & views</a></p>
+
+{% endfor %}

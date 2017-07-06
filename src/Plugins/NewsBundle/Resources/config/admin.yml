@@ -1,0 +1,11 @@
+services:
+    sonata.admin.news:
+        class: Plugins\NewsBundle\Admin\NewsAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Dashboard", label: "News" }
+        arguments:
+            - ~
+            - Plugins\NewsBundle\Entity\News
+            - ~
+        calls:
+          - [ setTemplate, [edit, PluginsPracticAreaBundle:Admin:base_edit.html.twig]]

@@ -1,0 +1,21 @@
+{% block googleMapPA %}
+<div class="contactMap">
+	<div class="map-sidebar">
+		<a href="{{ map_a }}" alt="{{ map_alt }}">
+			<div class="map-stuff">
+				<div class="map-stuff-container">
+					{{ contact_address_short1 }} <br> {{ contact_address_state }}<br>
+					<span>View larger map</span>
+				</div>
+			</div>
+			<img src="{{ map_img_sidebar }}" alt="{{ map_alt }}" />
+		</a>
+	</div>
+  <div class="title">Law Office of Yelena Sharova</div>
+  <address>
+      745 Fifth Avenue, Suite 500
+      <br>
+      New York, New York 10151
+  </address>
+</div>
+{% endblock %}

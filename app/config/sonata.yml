@@ -1,0 +1,16 @@
+imports:    
+    - { resource: @AppBundle/Resources/config/admin.yml }
+    - { resource: @PluginsContentBundle/Resources/config/admin.yml }
+    - { resource: @PluginsPracticAreaBundle/Resources/config/admin.yml }
+    - { resource: @PluginsNewsBundle/Resources/config/admin.yml }
+    - { resource: @PluginsBlogBundle/Resources/config/admin.yml }
+
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        sonata.admin.block.admin_list:
+            contexts:   [admin]
+        sonata.user.block.menu:
+sonata_admin:
+    templates:
+        layout:  SonataAdminBundle::layout.html.twig

@@ -1,0 +1,67 @@
+{% block verticalMenu %}
+		<h2>Practice areas</h2>
+		{% include "PluginsPracticAreaBundle:PracticArea:search_practice.html.twig"%}
+		<!-- QUERRIES!!! -->
+				<ul class="first">
+				{% for area in areas %}
+{% if area.id == activeId and home != true %}
+
+						{% if area.id == activeId and not activeSubSectionId %}
+						<li class="link two-lvl top">
+							<!-- <a href="{{ path("plugins_practic_area_view", { "url" : area.url }) }}" title="{{ area.name }}" class="itself"> -->
+									 <span>{{ area.name }}</span>
+									 <hr>
+							<!-- </a> -->
+						{% else %}
+						<li class="link two-lvl  top">
+							<!-- <a href="{{ path("plugins_practic_area_view", { "url" : area.url }) }}" title="{{ area.name }}" class="itself"> -->
+									 <span>{{ area.name }}</span>
+									 <hr>
+							<!-- </a> -->
+						{% endif %}
+
+
+				{% if not area.practicAreaSubSections is empty %}
+						</li>
+						{% for subSection in area.practicAreaSubSections %}
+
+							{% if subSection.id == activeSubSectionId %}
+							<li class="link two-lvl focus">
+
+							{% else %}
+							<li class="link two-lvl">
+
+							{% endif %}
+								<a href="{{ path("plugins_practic_area_subsection_view", { "url" : subSection.url, "urlSection" : area.url }) }}"
+									 title="{{ subSection.name }}">
+									<span>{{ subSection.name }}</span>
+								</a>
+							</li>
+					{% endfor %}
+				</ul>
+				{% endif %}
+{% elseif home == true %}
+					<li class="link two-lvl practice">
+							<a href="{{ path("plugins_practic_area_view", { "url" : area.url }) }}" class="itself">
+									 <span>{{ area.name }}</span>
+							</a>
+							<i class="fa fa-angle-down" aria-hidden="true"></i>
+
+					{% if not area.practicAreaSubSections is empty %}
+						<ul class="second">
+							{% for subSection in area.practicAreaSubSections %}
+								<li>
+									<a href="{{ path("plugins_practic_area_subsection_view", { "url" : subSection.url, "urlSection" : area.url }) }}"
+										 title="{{ subSection.name }}">
+										{{ subSection.name }}
+									</a>
+								</li>
+							{% endfor %}
+						</ul>
+
+					{% endif %}
+					</li>
+{% endif %}
+				{% endfor %}
+				</ul>
+{% endblock %}

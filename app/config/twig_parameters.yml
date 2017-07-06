@@ -1,0 +1,40 @@
+twig:
+    globals:
+        og_title: Sharova Law Firm
+        og_descr: Representation in complex matrimonial, criminal, personal injury and appeal matters.
+        contact_email1: sharova@sharovalaw.com
+        contact_email2: greenberg@sharovalaw.com
+        contact_phone: 212-321-0741
+        contact_phone_header: (212) 321-0741
+        contact_fax: 212-939-6211
+        contact_office: Sharova Law Firm
+        latitude1: 40.7632871
+        longitude1: -73.975337
+        opening_hours1: Mo, Tu, We, Th, Fr, Sa, Su 01:00-23:59
+        contact_address_short1: 745 Fifth Avenue, Suite 500
+        contact_address_part1: 745 Fifth Avenue
+        contact_address_part2: Suite 500
+        contact_address_short2: 147 Prince Street, 4th Floor
+        contact_address_city: New York City
+        contact_address_state: New York
+        contact_address_country: USA
+        contact_postal_code1: 10151
+        contact_postal_code2: 11201
+        contact_address1: 745 Fifth Avenue, Suite 500
+        contact_city1: New York
+        contact_state1: New York
+        contact_zip1: 10151
+        contact_address2: 147 Prince Street, 4th Floor
+        contact_district2: Brooklyn
+        contact_zip2: 11201
+        company_description: The Law Office of Yelena Sharova is a full-service firm providing a wide-range of services for clients in need of sound and effective legal advice.
+        contact_type1: customer support
+        map1: <iframe src=\"https://www.google.com/maps/embed/v1/place?q=745+Fifth+Avenue,+Suite+500,+New+York&key=AIzaSyA_5daK0cvFZ0aI7xFMPHgDJtJxcAkXGqo\" width=\"600\" height=\"450\" frameborder=\"0\" style=\"border:0\" allowfullscreen></iframe>
+        map_a: https://www.google.com/maps/place/745+Fifth+Avenue,+Suite+500+New+York,+New+York+10151/
+        map_alt:  Law Office of Yelena Sharova, P.C., 745 Fifth Avenue, Suite 500 New York
+        map_img_footer: https://maps.googleapis.com/maps/api/staticmap?center=745+Fifth+Avenue,+Suite+500+New+York,+New+York+10151&zoom=15&scale=2&size=220x220&maptype=roadmap&key=AIzaSyA_5daK0cvFZ0aI7xFMPHgDJtJxcAkXGqo&format=png&visual_refresh=true&markers=size:mid%%7Ccolor:0xff0000%%7Clabel:%%7C745+Fifth+Avenue,+Suite+500+New+York,+New+York+10151
+        map_img_contacts: https://maps.googleapis.com/maps/api/staticmap?center=745+Fifth+Avenue,+Suite+500+New+York,+New+York+10151&zoom=16&scale=2&size=640x256&maptype=roadmap&key=AIzaSyA_5daK0cvFZ0aI7xFMPHgDJtJxcAkXGqo&format=png&visual_refresh=true&markers=size:mid%%7Ccolor:0xff0000%%7Clabel:%%7C745+Fifth+Avenue,+Suite+500+New+York,+New+York+10151
+        map_img_sidebar: https://maps.googleapis.com/maps/api/staticmap?center=745+Fifth+Avenue,+Suite+500+New+York,+New+York+10151&zoom=15&scale=2&size=300x220&maptype=roadmap&key=AIzaSyA_5daK0cvFZ0aI7xFMPHgDJtJxcAkXGqo&format=png&visual_refresh=true&markers=size:mid%%7Ccolor:0xff0000%%7Clabel:%%7C745+Fifth+Avenue,+Suite+500+New+York,+New+York+10151
+        map_768: <iframe src="https://snazzymaps.com/embed/1470" width="100%"></iframe>
+        map_1024: <iframe src="https://snazzymaps.com/embed/1247" width="100%"></iframe>
+        map_1440: <iframe src="https://snazzymaps.com/embed/1042" width="100%"></iframe>

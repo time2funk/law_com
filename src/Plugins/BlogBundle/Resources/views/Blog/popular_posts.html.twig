@@ -1,0 +1,23 @@
+{% block verticalMenu %}
+    {% if not posts is empty %}
+    <span class="title">
+        popular post
+    </span>
+    <ul>
+        {% for post in posts %}
+        <li class="popular-posts-element">
+            <span class="date">
+                {{ post.createdUsFormat }}
+            </span>
+            {% if post.blogTopic is empty %}
+                <a href="{{ path("plugins_blog_view_post_without_topic", {categoryUrl: post.blogCategory.url, id: post.id, postUrl: post.url}) }}" title="{{ post.name }}">
+            {% else %}
+                <a href="{{ path("plugins_blog_view_post", {categoryUrl: post.blogCategory.url, topicUrl: post.blogTopic.url, id: post.id, postUrl: post.url}) }}" title="{{ post.name }}">
+            {% endif %}
+                {{ post.name }}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+{% endblock %}

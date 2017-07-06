@@ -1,0 +1,197 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block title %}{{- page.metatitle ? page.metatitle : parent() -}}{% endblock %}
+{% block meta_keywords %}{{- page.metakeywords ? page.metakeywords : parent() -}}{% endblock %}
+{% block meta_description %}{{- page.metadescription ? page.metadescription : parent() -}}{% endblock %}
+{% block og_title %}{{- page.metatitle ? page.metatitle : parent() -}}{% endblock %}
+{% block og_descr %}{{- page.metadescription ? page.metadescription : parent() -}}{% endblock %}
+{% block last_updated_block %}{{ page.updatedAtDatetime }}{% endblock %}
+
+{% block bodyId %}about{% endblock %}
+{% block bodyClass %}home{% endblock %}
+
+{% block content %}
+
+<div id="static-menu" class="home">
+	<ul>
+		<li class='cur'><a href="#sub-about">About Us</a></li>
+		<li><a href="#sub-pa-block">Practice Areas</a></li>
+		<li><a href="#sub-region-text">Regions</a></li>
+		<li><a href="#sub-team-list">Our Team</a></li>
+		<li><a href="#contact-baner">Contact Us</a></li>
+	</ul>
+</div>
+
+<wrapper>
+	<section id='home-about' class="container">
+		<div class="row">
+			<div class="sub-block" id='sub-about'>
+				<h2>About us</h2>
+				<p>At Sharova Law Firm, we believe that communication is the first and most effective line of defense. When it comes to legal matters, we know how important it is for you to be heard and represented. We go above and beyond for our clients, priding ourselves on our availability and responsiveness.</p>
+				<p>By being sensitive to your situation and tough in the courtroom, we will work with you to resolve your case in a professional and timely manner. We have been there for our clients through thick and thin, and will be there for you when you need us most. Even in complicated scenarios, we are able to navigate the complex legal systems in New York, New Jersey and the federal government.</p>
+			</div>
+
+			<div class="sub-block" id='sub-pa-text'>
+				<div class="middle">
+					<h2>Experienced Lawyers on Your Side</h2>
+					<p>We know that you have many choices when it comes to deciding which New York or New Jersey law firm to hire. What makes us different is that we have extensive experience in a wide array of areas and we are equally qualified in each of them. We know what’s necessary in order to navigate the legal system on your behalf, particularly in the following areas of practice:</p>
+				</div>
+			</div>
+			<div class="sub-block" id='sub-pa-block'>
+				{% render controller("PluginsPracticAreaBundle:PracticArea:practicAreasShortAbout") %}
+			</div>
+
+			<div class="sub-block" id="sub-region-img">
+
+			</div>
+			<div class="sub-block" id="sub-region-text">
+				<h2>Proudly Serving New York and New Jersey</h2>
+				<p>While our offices are located in the heart of New York City, our ability to provide legal representation and consultation extends to the following regions:</p>
+				<ul>
+					<li>● Eastern New York</li>
+					<li>● Southern New York</li>
+					<li>● Northern New York District Courts</li>
+					<li>● The State of New Jersey</li>
+					<li>● District Court of New Jersey</li>
+				</ul>
+				<p>We belong to the following associations:</p>
+				<ul>
+					<li>● New York County Bar Association (Manhattan)</li>
+					<li>● Queens County Bar Association</li>
+					<li>● Kings County Bar Association</li>
+					<li>● Richmond County Bar Association</li>
+					<li>● Nassau County Bar Association</li>
+					<li>● Union County New Jersey Bar Association</li>
+					<li>● Middlesex County New Jersey Bar Association</li>
+				</ul>
+			</div>
+
+			<div class="sub-block" id="hor-text">
+				<p>Whether your case involves a settlement, collaborative divorce, or the necessity of upfront resources, Sharova Law Firm will guide you through the process. As your trusted legal team, we will work toward the best possible outcome for your individual case, and provide you with the resources you need to move forward in your life.</p>
+			</div>
+
+
+			<div class="sub-block" id="sub-team-text">
+				<h2>Working In Your Best Interests <br>Every Step Of The Way</h2>
+
+				<p>The first step when you come to Sharova Law Firm is for us to listen closely to what your particular legal matter entails and look at it from every angle possible. Your priorities are our priorities throughout the entire process. Especially in family law and divorce cases, the welfare of your children and your safety are of the utmost importance to us as your legal team.</p>
+
+				<p>Negotiation first, mediation next, and litigation last is the way we conduct ourselves here at Sharova Law Firm. We make sure that your matters are resolved with as little time, money, and stress as possible, while working tirelessly toward your desired outcome. Of course, we are always ready to take the actions necessary to proceed in your best interest, providing you with every potential option that might be available to you. We also know that cost may be a concern, but rest assured that we put your needs before our bottom line to make your representation as cost-effective as possible.</p>
+
+				<p>Contact a law firm that truly cares about your wellbeing. We will do whatever it takes to find a resolution to your matter, no matter how complex your case may be.</p>
+
+			</div>
+
+			<div class="sub-block" id="sub-team-list">
+				<h2>Our Team</h2>
+
+				<ul>
+					<li>
+	          <a href="#"><img src="/img/persona/per-w.png"></a>
+	          <div class="block">
+	            <h3>Nettie Norton</h3>
+	            <div class="info-block">
+	              <h4>Type something</h4>
+	              <p>
+	                People like a “special” price or exclusive offer directed
+	              </p>
+	            </div>
+	            <div class="stat-block">
+	              <h4><a href="">Click to discover</a></h4>
+	              <div class="statistic">
+	                <ul>
+	                  <li>
+	                    <span>233</span>
+	                    <h5>Completed Casess</h5>
+	                  </li>
+	                  <li>
+	                    <span>33</span>
+	                    <h5>Years of practice</h5>
+	                  </li>
+	                  <li>
+	                    <span>97%</span>
+	                    <h5>wining rate</h5>
+	                  </li>
+	                </ul>
+	              </div>
+	            </div>
+	          </div>
+	        </li>
+	        <li>
+	          <a href="#"><img src="/img/persona/per-m.png"></a>
+	          <div class="block">
+	            <h3>Henry Harper</h3>
+	            <div class="info-block">
+	              <h4>Type something</h4>
+	              <p>
+	                People like a “special” price or exclusive offer directed
+	              </p>
+	            </div>
+	            <div class="stat-block">
+	              <h4><a href="">Click to discover</a></h4>
+	              <div class="statistic">
+	                <ul>
+	                  <li>
+	                    <span>233</span>
+	                    <h5>Completed Casess</h5>
+	                  </li>
+	                  <li>
+	                    <span>33</span>
+	                    <h5>Years of practice</h5>
+	                  </li>
+	                  <li>
+	                    <span>97%</span>
+	                    <h5>wining rate</h5>
+	                  </li>
+	                </ul>
+	              </div>
+	            </div>
+	          </div>
+	        </li>
+				</ul>
+			</div>
+		</div>
+	</section>
+	<section id="contact-baner" class="home">
+		<div class="back">
+			<div class="cover"></div>
+		</div>
+			<div class="container">
+				<div class="side a">
+					<a href="app_dev.php"><img src="/img/lgog.svg"></a>
+					<br>
+					<span>
+						Contact a law firm that truly cares about your wellbeing. We will do whatever it takes to find a resolution to your matter, no matter how complex your case may be.
+					</span>
+				</div>
+				<div class="side b">
+					{% include "AppBundle:Contact:contact_block_form.html.twig" %}
+					<!-- <div id="contactus">
+						<h2>Contact us now</h2>
+						<p>Leave your message in the form below</p>
+						<form action="">
+							<div class="form-data">
+								<lable class='action'>name</lable>
+								<input type="text" name='name'>
+							</div>
+							<div class="form-data input">
+								<lable class='action'>email</lable>
+								<input type="text" name='name'>
+							</div>
+							<div class="form-data input">
+								<lable class='action'>phone</lable>
+								<input type="text" name='name'>
+							</div>
+							<div class="form-data">
+								<lable>message</lable>
+								<textarea name="msg" placeholder='Tell us about your case'></textarea>
+							</div>
+
+							<a href=""><div class="pbtn">contact us</div></a>
+						</form>
+					</div> -->
+				</div>
+			</div>
+	</section>
+</wrapper>
+{% endblock %}

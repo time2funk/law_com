@@ -1,0 +1,40 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block title %}{{- page.metatitle ? page.metatitle : parent() -}}{% endblock %}
+{% block meta_keywords %}{{- page.metakeywords ? page.metakeywords : parent() -}}{% endblock %}
+{% block meta_description %}{{- page.metadescription ? page.metadescription : parent() -}}{% endblock %}
+{% block og_title %}{{ og_title }}{% endblock %}
+{% block og_descr %}{{ og_descr }}{% endblock %}
+{% block last_updated_block %}{{ page.updatedAtDatetime}}{% endblock %}
+
+{% block content %}
+
+		<wrapper>
+
+      {% include "AppBundle:App:main-mozaic.html.twig" %}
+
+      {# STATIC HTML #}
+      {% include "AppBundle:App:main.static.html.twig" %}
+
+ 			{% render controller("PluginsPracticAreaBundle:PracticArea:practicAreasShortList") %}
+
+ 			{% render controller("PluginsNewsBundle:News:lastMozaicList") %}
+
+ 			{% if not blogDisable %}
+ 					{% block blogSection %}
+ 					<section class="contact-section content-row clearfix">
+ 							<!-- <h2 id="h2-blog">Blog</h2> -->
+ 							{% render controller("PluginsBlogBundle:Blog:short") %}
+ 					</section>
+ 					{% endblock %}
+ 			{% endif %}
+ 		</wrapper>
+
+		{#
+		{% include "AppBundle:App:main_old.html.twig" %}
+		 #}
+
+{% endblock %}
+{% block footer %}
+		{% include "default/footer.html.twig" with {'home' : true} %}
+{% endblock %}

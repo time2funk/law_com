@@ -1,0 +1,13 @@
+{% block ampJsonLD %}
+	<script type="application/ld+json">
+		{
+			"@context": "http://schema.org",
+			"@type": "NewsArticle",
+			"headline": "{{ page.metatitle}}",
+			"datePublished": "{{ page.updatedAtDatetime}}",
+			"image": [
+				"{{ (app.request.getSchemeAndHttpHost() ~ asset("/images/logo_og.png"))}}"
+			]
+		}
+	</script>
+{% endblock %}

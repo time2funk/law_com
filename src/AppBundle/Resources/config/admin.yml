@@ -1,0 +1,27 @@
+services:
+    sonata.admin.attorney:
+        class: AppBundle\Admin\AttorneyAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Dashboard", label: "Attorney" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Attorney
+            - ~
+            
+    sonata.admin.quotes:
+        class: AppBundle\Admin\QuoteAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Dashboard", label: "Quotes" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Quote
+            - ~
+            
+    sonata.admin.interest:
+        class: AppBundle\Admin\InterestAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Feedback", label: "Messages" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Interest
+            - ~

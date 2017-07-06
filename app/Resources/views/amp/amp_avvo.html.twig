@@ -1,0 +1,6 @@
+{% block ampAvvo %}
+	<p>We're recognized experts by our clients in these four areas. But do not just take our word for it. Check out what our clients say about us:<br />
+	<script src="https://www.avvo.com/assets/badges-v2.js" type="mce-text/javascript"></script>
+	</p>
+	{% include "PluginsPracticAreaBundle:PracticArea:avvo_pa.html.twig" with {'name' : practicArea.name} %}
+{% endblock %}

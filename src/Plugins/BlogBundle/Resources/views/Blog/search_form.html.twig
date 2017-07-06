@@ -1,0 +1,9 @@
+{% block searchForm %}
+    <div class="psearch" >
+        <form action="{{ path("plugins_blog_homepage") }}" method="get" id="search-form">
+              <input id="blog-queries" type="text" placeholder="" name="q" value="{{ queries }}"
+                     class="form-control"/>
+              <button type="submit" class="search-submit"><img class="s_pbtn" src="/img/s-icon.svg" alt=""></button>
+        </form>
+    </div>
+{% endblock %}

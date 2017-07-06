@@ -1,0 +1,25 @@
+# src/AppBundle/Resources/config/validation.yml
+AppBundle\Entity\Interest:
+    properties:
+        name:
+            - NotBlank: { message: Empty name }
+            - Length:
+                min: 3
+                minMessage: Name must be min 3 symbols 
+                max: 200
+                maxMessage: Name must be max 200 symbols
+        phone:
+            - NotBlank: { message: Empty phone number }
+            - Length:
+                min: 6
+                minMessage: Phone must be min 6 symbols
+                max: 20
+                maxMessage: Phone must be max 20 symbols
+        email:
+            - NotBlank: { message: Empty email }
+            - Email: { message: Incorrect email}
+            - Length:
+                max: 255
+                maxMessage: Incorrect email (max 255 symbols)
+        message:
+            - NotBlank: { message: Empty message }

@@ -1,0 +1,36 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block title %}{{- page.metatitle ? page.metatitle : parent() -}}{% endblock %}
+{% block meta_keywords %}{{- page.metakeywords ? page.metakeywords : parent() -}}{% endblock %}
+{% block meta_description %}{{- page.metadescription ? page.metadescription : parent() -}}{% endblock %}
+{% block og_title %}{{- page.metatitle ? page.metatitle : parent() -}}{% endblock %}
+{% block og_descr %}{{- page.metadescription ? page.metadescription : parent() -}}{% endblock %}
+{% block last_updated_block %}{{ page.updatedAtDatetime}}{% endblock %}
+
+{% block ampLinkBlock %}
+    {% render controller("AppBundle:Amp:ampLinkBlock", {'request' : app.request }) %}
+{% endblock %}
+
+{% block bodyId %}pa{% endblock %}
+{% block bodyClass %}section{% endblock %}
+{% block content %}
+		<wrapper>
+		    <section id="sub_section" class="parent container-fluid">
+		        <div class="row">
+		            <div class="submenu">
+
+									<div id="side_menu">
+										{% render controller("PluginsPracticAreaBundle:PracticArea:practicVerticalMenuShort", {'activeId' : active.id}) %}
+									</div>
+								</div>
+<!-- _________________ -->
+  {% include "PluginsPracticAreaBundle:PracticArea:show_pa.html.twig" with { 'section' : 'sub', 'page' : active}%}
+<!-- _________________ -->
+
+		            <div class="contactus">
+										{% include "AppBundle:Contact:contact_block_form.html.twig" %}
+		            </div>
+		        </div>
+		    </section>
+		</wrapper>
+{% endblock %}

@@ -1,0 +1,220 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block title %}{{- content.metatitle ? content.metatitle : parent() -}}{% include "PluginsBlogBundle:Blog:page_to_meta.html.twig" with {'pages': pages, 'page': page} %}{% endblock %}
+{% block meta_keywords %}{{- content.metakeywords ? content.metakeywords : parent() -}}{% endblock %}
+{% block meta_description %}{{- content.metadescription ? content.metadescription : parent() -}}{% include "PluginsBlogBundle:Blog:page_to_meta.html.twig" with {'pages': pages, 'page': page} %}{% endblock %}
+{% block og_title %}{{- content.metatitle ? content.metatitle : parent() -}}{% include "PluginsBlogBundle:Blog:page_to_meta.html.twig" with {'pages': pages, 'page': page} %}{% endblock %}
+{% block og_descr %}{{- content.metadescription ? content.metadescription : parent() -}}{% endblock %}
+{% block last_updated_block %}{{ content.updatedAtDatetime}}{% endblock %}
+
+{% block canonicalLinkBlock %}
+{# include "default/canonical.html.twig" #}
+{% set np_params = null %}
+{% if queries %}
+		{% set params = {'q' : queries|url_encode} %}
+{% endif %}
+{% include "default/next-prev.html.twig" with {'pages': pages, 'page': page, 'np_params': parameters, 'queries': np_params, 'route': route, 'limit': null} %}
+{% endblock %}
+
+{% block bodyId %}blog{% endblock %}
+{% block bodyClass %}blog{% endblock %}
+
+{% block content %}
+<wrapper>
+		<section id="blog" class="parent container-fluid">
+				<div class="row">
+						<div class="submenu">
+
+							<div id="side_menu">
+
+								{% if posts is empty %}
+
+								{% else %}
+
+									{% for post in posts %}
+										{% if category is empty %}
+											{% set postname = 'Blog' %}
+											{% set hometrig = true %}
+										{% else %}
+											{% set postname = category.name %}
+											{% set hometrig = true %}
+										{% endif %}
+									{% endfor %}
+									{% if hometrig == true %}
+										<h1>{{ postname }} {% include "PluginsBlogBundle:Blog:page_to_name.html.twig" with {'pages': pages, 'page': page} %}</h1>
+									{% else %}
+									  <h2>{{ postname }} {% include "PluginsBlogBundle:Blog:page_to_name.html.twig" with {'pages': pages, 'page': page} %}</h2>
+									{% endif %}
+
+									<div class="psearch">
+											<input type="text" id='search'>
+											<!-- <i class="fa fa-search" aria-hidden="true"></i> -->
+											<img class="s_pbtn" src="/img/s-icon.svg" alt="">
+									</div>
+
+									{# {% include "PluginsBlogBundle:Blog:search_form.html.twig" with { 'queries': queries } %} #}
+									<!-- QUERRIES!!! -->
+
+									{% render controller("PluginsBlogBundle:Blog:blogVerticalMenu", {categoryId: category ? category.id : null, topicId: topic ? topic.id : null, home : hometrig, name : postname }) %}
+
+								{% endif %}
+								<!-- {% include "PluginsPracticAreaBundle:PracticArea:google_map_pa.html.twig" %} -->
+							</div>
+							<div class="fb-square">{% include 'default/fb-square.html.twig' %}</div>
+						</div>
+<!-- _________________ -->
+								{% include "PluginsBlogBundle:Blog:show_blog.html.twig" with {
+								'category' : category,
+								'queries' : queries,
+								'pages' : pages,
+								'topic' : topic,
+								'posts' : posts,
+								'allposts' : allposts
+								}%}
+<!-- _________________ -->
+						<!--  -->
+						{#
+						<div class="content">
+							{% if category is empty %}
+									{% if queries is empty %}
+											{% include "default/breadcrumbs.html.twig" with { 'currentPage': 'Blog', 'elements': null, 'home' : false } %}
+									{% else %}
+											{% include "default/breadcrumbs.html.twig" with { 'currentPage': queries, 'elements':
+													{
+															0: {'url': "plugins_blog_homepage", 'name': "Blog" },
+													}, 'home' : false
+											} %}
+									{% endif %}
+
+									<!-- <h1 id="blog-h1">Blog {% include "PluginsBlogBundle:Blog:page_to_name.html.twig" with {'pages': pages, 'page': page} %}</h1> -->
+
+							{% elseif topic is empty %}
+									{% include "default/breadcrumbs.html.twig" with { 'currentPage': category.name, 'elements':
+													{
+															0: {'url': "plugins_blog_homepage", 'name': "Blog" },
+													}, 'home' : false
+											} %}
+									<!-- <h1 id="blog-h1">{% include "PluginsBlogBundle:Blog:cat_name.html.twig" with { 'currentPage': category.name } %}</h1> -->
+							{% else %}
+									{% include "default/breadcrumbs.html.twig" with { 'currentPage': topic.name, 'elements':
+													{
+															0: {'url': "plugins_blog_homepage", 'name': "Blog" },
+															1: {'url': "plugins_blog_view_category", 'name': category.name, 'params': {'categoryUrl' : category.url}},
+													}, 'home' : false
+											} %}
+									{% include "PluginsBlogBundle:Blog:cat_name.html.twig" with { 'currentPage': category.name, 'elements':
+													{
+															0: {'url': "plugins_blog_homepage", 'name': "Blog" },
+													}
+									} %}
+									<!-- <h1 id="blog-h1">{% include "PluginsBlogBundle:Blog:cat_name.html.twig" with { 'currentPage': category.name } %}</h1> -->
+							{% endif %}
+
+								<div class="list">
+
+								{% if category is empty %}
+
+								{% set previews = {
+												0: "Criminal defense",
+												1: "Family law",
+												2: "Civil litigation"
+								} %}
+
+								{% if posts is empty %}
+										<div class="blog-subtitle">No posts found</div>
+								{% else %}
+									{% set break = false %}
+										{% for step in 0..2 %}
+											<div class="blog-subtitle">
+												{{previews[step]}} latest posts
+											</div>
+											{% set break = false %}
+											{% set count = 0 %}
+											<ul>
+												{% for post in allposts if not break %}
+													{% if post.blogTopic is empty %}
+															{% set postUrl = path("plugins_blog_view_post_without_topic", {categoryUrl: post.blogCategory.url, id: post.id, postUrl: post.url}) %}
+													{% else %}
+															{% set postUrl = path("plugins_blog_view_post", {categoryUrl: post.blogCategory.url, topicUrl: post.blogTopic.url, id: post.id, postUrl: post.url}) %}
+													{% endif %}
+													{% if post.blogCategory.name == previews[step] %}
+															<li class="item">
+																<a href="{{ postUrl }}" title="{{ post.name }}"><h3>{{ post.name }}</h3></a>
+																<div class="short">
+																	{{ post.short | raw }}
+																</div>
+																<hr>
+																<div class="info">
+																	<div class="row">
+																		<div class="dc">
+																			<div class="pattr"><span>date:</span>{{ post.dateUsFormat }}</div>
+																			<div class="pattr"><span>category:</span>{{ post.blogCategory.name }}</div>
+																		</div>
+																		<div class="readmore"><a href="{{ postUrl }}"><span class="pbtn">read more</span></a></div>
+																	</div>
+																</div>
+															</li>
+															{% set count = count + 1 %}
+															{% if count == 5 %}
+																{% set break = true %}
+															{% endif %}
+													{% endif %}
+												{% endfor %}
+											</ul>
+										{% endfor %}
+								{% endif %}
+
+								{% else %}
+
+									{% if posts is empty %}
+										<div class="blog-subtitle">No posts found</div>
+									{% else %}
+										<ul>
+										{% for post in posts %}
+												{% if post.blogTopic is empty %}
+													{% set postUrl = path("plugins_blog_view_post_without_topic", {categoryUrl: post.blogCategory.url, id: post.id, postUrl: post.url}) %}
+												{% else %}
+													{% set postUrl = path("plugins_blog_view_post", {categoryUrl: post.blogCategory.url, topicUrl: post.blogTopic.url, id: post.id, postUrl: post.url}) %}
+												{% endif %}
+					              <li class="item">
+					                <a href="{{ postUrl }}" title="{{ post.name }}"><h3>{{ post.name }}</h3></a>
+					                <div class="short">
+					                  {{ post.short | raw }}
+					                </div>
+					                <hr>
+					                <div class="info">
+					                  <div class="row">
+															<div class="dc">
+																<div class="pattr"><span>date:</span>{{ post.dateUsFormat }}</div>
+							                  <div class="pattr"><span>category:</span>{{ post.blogCategory.name }}</div>
+															</div>
+						                  <div class="readmore"><a href="{{ postUrl }}"><span class="pbtn">read more</span></a></div>
+														</div>
+					                </div>
+					              </li>
+										{% endfor %}
+				            </ul>
+									{% endif %}
+
+								{% endif %}
+
+								{% if category is not empty %}
+
+								{% set params = null %}
+								{% if queries %}
+										{% set params = {'q' : queries|url_encode} %}
+								{% endif %}
+								{% include "AppBundle:App:pagination.html.twig" with {'pages': pages, 'page': page, 'params': parameters, 'queries': params, 'route': route, 'limit': null} %}
+								{% endif %}
+								</div>
+						</div>
+						<!--  -->
+						#}
+						<div class="contactus">
+								{% include "AppBundle:Contact:contact_block_form.html.twig" %}
+								<div class="fb-square">{% include 'default/fb-square.html.twig' %}</div>
+						</div>
+				</div>
+		</section>
+</wrapper>
+{% endblock %}

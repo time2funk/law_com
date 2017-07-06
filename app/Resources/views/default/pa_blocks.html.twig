@@ -1,0 +1,28 @@
+{% block paBlocks %}
+{% set practice = {
+		'a': 'Criminal Law',
+		'b': 'Family Law',
+		'c': 'Personal Injury',
+		'd': 'Civil Litigation',
+		'e': 'Appeals'
+} %}
+{% set url = {
+		'a': 'practic-areas/criminal-defense',
+		'b': 'practic-areas/family-law',
+		'c': 'practic-areas/criminal-appeals/civil-appeal',
+		'd': 'practic-areas/civil-litigation',
+		'e': 'practic-areas/criminal-appeals'
+} %}
+<div id="pa_blocks" class="row">
+	{% for i in 'a'..'e' %}
+	<div class="block {{i}}">
+		<a href="{{ path('app_index') }}{{url[i]}}">
+			<img src="/img/pa_{{i}}.svg">
+			<h3>{{practice[i]}}</h3>
+			<span>LEARN MORE</span>
+		</a>
+	</div>
+	{% endfor %}
+</div>
+{#{% render controller ("PluginsPracticAreaBundle:PracticArea:shortCategoriesList")%}#}
+{% endblock %}

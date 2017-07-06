@@ -1,0 +1,29 @@
+{% set break = false %}
+{% for item in areasShort if not break %}
+
+{% set classes = {
+	1: 'first',
+	2: 'second',
+	3: 'third',
+	4: 'fourth'
+} %}
+{% set images = {
+	1: '/img/page-1.png',
+	2: '/img/page-1_3.png',
+	3: '/img/page-1_2.png',
+	4: '/img/page-1.png'
+} %}
+
+	<div class="box {{classes[loop.index]}}">
+		<img src="{{images[loop.index]}}" >
+		<div class="_text">
+			<span><a href="{{ path("plugins_practic_area_view", { "url" : item.url }) }}" title="practice areas">{{item.name}}</a></span>
+			<p><a href="{{ path("plugins_practic_area_view", { "url" : item.url }) }}" title="practice areas">practice areas</a></p>
+		</div>
+	</div>
+
+	{% if loop.index == 4 %}
+		{% set break = true %}
+	{% endif %}
+
+{% endfor %}

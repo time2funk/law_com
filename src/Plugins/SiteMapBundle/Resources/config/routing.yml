@@ -1,0 +1,3 @@
+plugins_site_map:
+    pattern:  /site-map
+    defaults: { _controller: PluginsSiteMapBundle:SiteMap:list }

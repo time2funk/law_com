@@ -1,0 +1,21 @@
+{# app/Resources/AmpBundle/views/layout.html.twig #}
+{% extends '::amp.html.twig' %}
+
+{% block body %}
+    {% block header %}
+        {% include "amp/header.html.twig" %}
+				{% include 'amp/amp_form.html.twig' %}
+        {% include "amp/amp_sidebar.html.twig" %}
+        {% include "amp/amp_banner.html.twig" %}
+    {% endblock %}
+
+    {% block content %}
+    {% endblock %}
+
+    {% block footer %}
+        {% include "amp/footer.html.twig" %}
+    {% endblock %}
+
+    {#{% render controller("AppBundle:App:analytics") %}#}
+    <!-- %my_last_update%:{% block last_updated_block %}{% endblock %}-->
+{% endblock %}

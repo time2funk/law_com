@@ -1,0 +1,117 @@
+{% block shortBlog %}
+<section id='p_blog' class="parent">
+		<div class="submenu">
+			<div id="side_menu">
+				<h2>Blog</h2>
+				{#
+				{% include "PluginsBlogBundle:Blog:search_form.html.twig" with { 'queries': null } %}
+				#}
+
+				<div class="psearch">
+						<input type="text" id='search'>
+						<!-- <i class="fa fa-search" aria-hidden="true"></i> -->
+						<img class="s_pbtn" src="/img/s-icon.svg" alt="">
+				</div>
+				{% include "PluginsBlogBundle:Blog:search.ajax.html.twig" %}
+
+				<ul class="blogShortList">
+					{% for category in categories %}
+
+							<li class="short-blog-link link {{ loop.first ? 'focus' }}" id="{{ loop.index }}">
+								<span class="link-short">{{ category.name }}</span>
+							</li>
+
+					{% endfor %}
+        </ul>
+			</div>
+		</div>
+		<div class="content">
+			<div  id='static-show'>
+		<!-- _________________ -->
+			{% for category in categories %}
+			{% set break = 1 %}
+			<ul class="short-blog-category category {{ not loop.first ? 'hidden' }}" id="{{ loop.index }}-details">
+			<div class="crumbs">
+				<h2>{{category}}</h2>
+			</div>
+
+				{% for post in category.blogPosts if break %}
+						{% if post.shown %}
+								{% if post.blogTopic is empty %}
+										{% set postUrl = path("plugins_blog_view_post_without_topic", {categoryUrl: post.blogCategory.url, id: post.id, postUrl: post.url}) %}
+								{% else %}
+										{% set postUrl = path("plugins_blog_view_post", {categoryUrl: post.blogCategory.url, topicUrl: post.blogTopic.url, id: post.id, postUrl: post.url}) %}
+								{% endif %}
+										<li class="item {{ loop.first ? "first" }} {{ (loop.index == 15) or (loop.index == category.blogPosts | length) ? "last" }}">
+											<h3><a href="{{ postUrl }}" title="{{ post.name }}">{{ post.name }}</a></h3>
+											<p>
+												{% if post.shortHome is empty %}
+													{% set x = 0 %}
+													{% set text = post.short | split('.') %}
+														{% for t in text %}
+																{% set x = (x + t|length) %}
+																{% if (x) < 450 %}
+																	{% if (t|last == '.') or (t|last == ' ') or (t|last == '>') %}
+																		{{ t | raw }}
+																	{% else %}
+																		{{ t | raw }}.
+																	{% endif %}
+																{% endif %}
+														{% endfor %}
+												{% else %}
+													{{ post.shortHome | raw }}
+												{% endif %}
+											</p>
+											<hr>
+											<div class="info">
+							          <div class="row">
+							            <div class="dc">
+							              <div class="pattr"><span>date:</span>{{ post.dateUsFormat }}</div>
+														<div class="pattr"><span>category:</span>{{ category }}</div>
+							            </div>
+							            <div class="readmore"><a href="{{ postUrl }}"><span class="pbtn">read more</span></a></div>
+							          </div>
+							        </div>
+										</li>
+										{% if loop.index == 15 %}
+												{% set break = 0 %}
+										{% endif %}
+								{% endif %}
+						{% endfor %}
+
+			</ul>
+			{% endfor %}
+			<a href="{{ path('plugins_blog_homepage') }}"><p class='ptext'>Link to full Blog page</p></a>
+			<!-- _________________ -->
+			  </div>
+			<!-- _________________ -->
+			    <div class="list" id="blog-filtered">
+			      <ul id='search_show'>
+			      </ul>
+			    </div>
+			<!-- _________________ -->
+		</div>
+
+
+		<div class="contactus">
+				{% include "AppBundle:Contact:contact_block_form.html.twig" %}
+				<div class="fb-square">{% include 'default/fb-square.html.twig' %}</div>
+		</div>
+
+    <script type="text/javascript">
+			console.log('azaza');
+					console.log('ururu');
+            $(".short-blog-link").click(function () {
+                var self = this,
+                        id = $(self).attr("id");
+												console.log("#" + id);
+                $(".short-blog-category").addClass("hidden");
+                $(".short-blog-link").removeClass("focus");
+
+                $("#" + id + "-details").removeClass("hidden");
+                $("#" + id).addClass("focus");
+            });
+    </script>
+
+</section>
+{% endblock %}

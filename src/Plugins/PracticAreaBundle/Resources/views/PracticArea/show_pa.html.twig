@@ -1,0 +1,170 @@
+
+<!-- ////////////////////////////////////////// -->
+<style>
+    #pa-filtered{
+      display: none;
+    }
+</style>
+
+<div class="content">
+<!-- _________________ -->
+  {% if section == 'home' %}
+<!-- _________________ -->
+    {% include "default/breadcrumbs.html.twig" with { 'elements': {
+            0: {'url': "plugins_practic_area_homepage", 'name': "Practice areas" }
+        }, 'currentPage': page.name, 'home' : true }
+    %}
+    <div id='static-show'>
+
+
+    {% set area = [
+    'criminal-defense',
+    'family-law',
+    '_civil-appeal',
+    'civil-litigation',
+    'criminal-appeals'
+    ]%}
+
+    {% render controller("PluginsPracticAreaBundle:PracticArea:practicMozaicItemsHard", {'area' : area}) %}
+{#
+{% render controller("PluginsPracticAreaBundle:PracticArea:practicMozaicItems2", {
+        'area[0]' : 'criminal-defense',
+        'area[1]' : 'family-law',
+        'area[2]' : 'civil-appeal',
+        'area[3]' : 'civil-litigation',
+        'area[4]' : 'criminal-appeals'
+}) %}
+
+{% render controller("PluginsPracticAreaBundle:PracticArea:practicMozaicItems", {
+        'area1' : 'criminal-defense',
+        'area2' : 'family-law',
+        'area3' : 'civil-appeal',
+        'area4' : 'civil-litigation',
+        'area5' : 'criminal-appeals'
+}) %}
+#}
+      <div class="sub-text">
+        <div class="txt">
+          {{ page.content | raw }}
+          <hr>
+          {% include "default/fb.html.twig" %}
+        </div>
+      </div>
+    </div>
+<!-- _________________ -->
+  {% elseif section == 'sub' %}
+<!-- _________________ -->
+    {% include "default/breadcrumbs.html.twig" with { 'elements': { 0: {'url': "plugins_practic_area_homepage", 'name': "Practice areas" }}, 'currentPage': page.name, 'home' : false } %}
+
+    <div  id='static-show'>
+      <div class="sub-text">
+
+        {% include "default/top_section.html.twig" with { 'section_name': page.name, 'section_desc': page.metadescription, 'backgroundImage': page.photoFullPath } %}
+
+        <div class="txt">
+          {{ page.content | raw }}
+          <hr>
+          {% include "default/fb.html.twig" %}
+        </div>
+      </div>
+    </div>
+<!-- _________________ -->
+  {% else %}
+<!-- _________________ -->
+{% include "default/breadcrumbs.html.twig" with { 'elements': {
+        0: {'url': "plugins_practic_area_homepage", 'name': "Practice areas" },
+        1: {'url': "plugins_practic_area_view", 'name': pa.name, "params" : {"url" : pa.url} }
+    }, 'currentPage': page.name, 'home' : false }
+%}
+<div  id='static-show'>
+  <div class="sub-text">
+    {% include "default/top_section.html.twig" with { 'section_name': page.name, 'section_desc': page.metadescription,
+    'backgroundImage': asset(active.photoFullPath) } %}
+    <div class="txt">
+      {% if page.createdAtDatetime <= '2016-01-25' %}
+      <h2>
+          {{ page.name }}
+      </h2>
+      {% endif %}
+      {{ page.content | raw }}
+      <!-- {% include "PluginsPracticAreaBundle:PracticArea:additional_description.html.twig" %} -->
+      <hr>
+      {% include "default/fb.html.twig" %}
+    </div>
+  </div>
+</div>
+<!-- _________________ -->
+  {% endif %}
+<!-- _________________ -->
+    <div class="list" id="pa-filtered">
+      <ul id='search_show'>
+      </ul>
+    </div>
+<!-- _________________ -->
+</div>
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+      var searchRequest = null;
+      $("#search").val('');
+
+      console.log('search');
+
+      $("#search").on('keyup',function() {
+
+          var that = this;
+          var value = $(this).val();
+
+          var entitySelector = $("#search_show").html('');
+          if ( $(this).val().length > 0 ) {
+              if (searchRequest != null)
+                  searchRequest.abort();
+              $('#search_show').empty()
+
+              $.ajax({
+                  type: "POST",
+                  url: "{{ path('pa_ajax_search') }}",
+                  data: {
+                      'searchText' : value
+                  },
+                  success: function(msg){
+                    console.log('responce');
+                    console.log(msg);
+
+                    if (value==$(that).val()) {
+                        var result = JSON.parse(msg);
+                        console.log(result);
+
+                        $('#static-show').slideUp("fast");
+                        var content = '';
+                        if(result.length == 0){
+                          content += '<li>no result...</li>';
+                        }else{
+                          for(var i=0; i < result.length; i++){
+                            content +=
+                            '<li class="item">'+
+                              '<a href="/practic-areas/'+
+                              result[i]['subfolder']+
+                              '/'+
+                              result[i]['url']+
+                              '"title="'+
+                              result[i]['name']+'">'+
+                              '<h3>'+result[i]['name']+'</h3>'+
+                              '</a>'+
+                              '<hr>'+
+                            '</li>';
+                          }
+                        }
+                        $('#search_show').append(content);
+                        $('#pa-filtered').slideDown('fast');
+                      }
+                   }
+              });
+          }// if( $(this).val().length > 0 )
+          else{
+            $('#pa-filtered').slideUp('fast');
+            $('#static-show').slideDown('fast');
+          }
+        });// #search on 'keyup'
+    });
+</script>

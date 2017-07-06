@@ -1,0 +1,10 @@
+{% block pageToMetaNews %}
+	{% spaceless %}
+	{% if (page == 1) %} - Law office of Yelena Sharova{% endif %}
+	{% if (pages > 1) %}
+	{% if (page != 1) %}
+	&nbsp;- Page {{ page }}
+	{% endif %}
+	{% endif %}
+	{% endspaceless %}
+{% endblock %}

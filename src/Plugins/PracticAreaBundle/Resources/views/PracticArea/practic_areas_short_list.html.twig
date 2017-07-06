@@ -1,0 +1,58 @@
+{% block articlesList %}
+<section id='p_collapse'>
+		<div class="container parent" style="height: 100%;">
+			<div class="side a">
+
+        <h2>Practice areas</h2>
+
+        <div class="panel-group" id="practice-short">
+
+					{% for area in areas %}
+				  <div class="panel panel-default">
+						<div id="{{ area.areaId }}" class="panel-collapse collapse {{ loop.first ? "in act" }}">
+              <div class="panel-body">
+								{{ area.short | raw }}
+								<a href="{{ path("plugins_practic_area_view", { "url" : area.url }) }}">
+									Read More
+								</a>
+							</div>
+            </div>
+
+            <div class="panel-heading">
+							<a data-toggle="collapse" data-parent="#practice-short" href="#{{ area.areaId }}">
+	              <h4 class="panel-title">
+									{{ area.name }}
+	              </h4>
+	              <i class="fa fa-angle-right" aria-hidden="true"></i>
+							</a>
+            </div>
+					</div>
+					{% endfor %}
+
+				</div>
+
+			</div>
+
+			{% block barAssociationsBlock %}
+	      {% render controller("AppBundle:App:barAssociationBlock") %}
+	    {% endblock %}
+
+			<div class="vert"></div>
+
+      <div class="side b">
+        <div class="vert"></div>
+        <div class="pslider">
+					{% block avvo %}
+		        {% include "AppBundle:App:avvo.html.twig" %}
+			    {% endblock %}
+          <div class="cntrls noselect">
+            <a href="javascript:void(0);"><div class="prev cntrl"></div></a>
+            <a href="javascript:void(0);"><div class="next cntrl"></div></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <img class='bck'  src="/img/man.png">
+  </section>
+{% endblock %}

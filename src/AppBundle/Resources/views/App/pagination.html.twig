@@ -1,0 +1,66 @@
+{% block paging %}
+    {% set params = queries ? params|merge(queries) : params %}
+    {% if (pages > 1) %}
+        <div class="page-crumbs">
+            <div class="cover">
+        {% if (page == 1) %}
+								<a href="#"><span class="act">{{ page }}</span></a>
+            {% if ((page+1) < pages)  %}
+                {% set params = params|merge({'page': page+1}) %}
+								<a href="{{ path(route, params) }}"><span>{{ page+1 }}</span></a>
+            {% endif %}
+            {% if ((page+2) < pages) %}
+                {% set params = params|merge({'page': page+2}) %}
+                <a href="{{ path(route, params) }}"><span>{{ page+2 }}</span></a>
+            {% endif %}
+        {% else %}
+            {% if queries %}
+                <a href="{{ path(route, params) }}"><span>1</span></a>
+            {% else %}
+                <a href="{{ path(route, params) }}"><span>1</span></a>
+            {% endif %}
+        {% endif %}
+
+        {% if (pages > 2) %}
+            {% if (page != 1 and (page-1) != 1 and (page-2) != 1 and pages != 4) %}
+                <a href="#" class="disabled"><span>...</span></a>
+            {% endif %}
+
+            {% if (page != 1 and page != pages) %}
+                {% if (page-1 != 1) %}
+                    {% set params = params|merge({'page': page-1}) %}
+                    <a href="{{ path(route, params) }}"><span>{{ page-1 }}</span></a>
+                {% endif %}
+										<a href="#"><span class="act">{{ page }}</span></a>
+                {% if (page+1 != pages) %}
+                    {% set params = params|merge({'page': page+1}) %}
+                    <a href="{{ path(route, params) }}"><span>{{ page+1 }}</span></a>
+                {% endif %}
+            {% endif %}
+
+            {% if (page != pages and (page+1) != pages and (page+2) != pages and pages != 4) %}
+                <a href="#" class="disabled"><span>...</span></a>
+            {% endif %}
+        {% endif %}
+
+        {% if (page == pages) %}
+            {% if ((page-2) > 1)  %}
+                {% set params = params|merge({'page': page-2}) %}
+                <a href="{{ path(route, params) }}"><span>{{ page-2 }}</span></a>
+            {% endif %}
+            {% if ((page-1) > 1)  %}
+                {% set params = params|merge({'page': page-1}) %}
+                <a href="{{ path(route, params) }}"><span>{{ page-1 }}</span></a>
+            {% endif %}
+								<a href="#"><span class="act">{{ page }}</span></a>
+        {% else %}
+            {% set params = params|merge({'page': pages}) %}
+            <a href="{{ path(route, params) }}"><span>{{ pages }}</span></a>
+        {% endif %}
+          <a href="#" class="disabled">from</a>
+          {% set params = params|merge({'page': pages}) %}
+          <a href="{{ path(route, params) }}"><span>{{ pages }}</span></a>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

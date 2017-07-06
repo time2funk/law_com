@@ -1,0 +1,91 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} {% trans %}Sitemap Sharovalaw.com{% endtrans %}{% endblock %}
+{% block meta_description %}{% trans %}Connect with New York criminal lawyer Yelena Sharova for an individual approach for any of criminal, civil or family law troubles. We guarantee responsible treatment of any separate case.{% endtrans %}{% endblock %}
+{% block og_title %}Sharova Law Fim{% endblock %}
+{% block og_descr %}Law Office of Yelena Sharova{% endblock %}
+
+{% block bodyId %}blog{% endblock %}
+
+{% block content %}
+<wrapper>
+		<section id="blog" class="parent container-fluid">
+				<div class="row">
+					<div class="submenu">
+
+							<div id="side_menu">
+
+							<h2>Sitemap</h2>
+							<div class="psearch">
+									<input type="text">
+									<!-- <i class="fa fa-search" aria-hidden="true"></i> -->
+									<img class="s_pbtn" src="/img/s-icon.svg" alt="">
+							</div>
+							{# {% include "PluginsBlogBundle:Blog:search_form.html.twig" with { 'queries': queries } %} #}
+							<!-- QUERRIES!!! -->
+
+							<!-- {% include "PluginsPracticAreaBundle:PracticArea:google_map_pa.html.twig" %} -->
+						</div>
+						<div class="fb-square">{% include 'default/fb-square.html.twig' %}</div>
+				</div>
+
+				<div class="content">
+
+							{% include "default/breadcrumbs.html.twig" with { 'currentPage': 'Sitemap', 'elements': null, 'home' : true } %}
+					<div class="txt container">
+						<h1>Sharovalaw Sitemap</h1>
+						<h2><a class="sitemap-h2" href="{{ path('plugins_practic_area_homepage') }}" title="Practic Areas">Practic Areas</a></h2>
+						<div class="site-map">
+						{% for area in areas %}
+							<div class="practic-area-column">
+									<h3><a href="{{ path('plugins_practic_area_view', {url: area.url}) }}" title="{{ area.name }}">{{ area.name }}</a></h3>
+									{% if area.practicAreaSubSections %}
+											{% for subArea in area.practicAreaSubSections %}
+													<h4><a href="{{ path('plugins_practic_area_subsection_view', {urlSection: area.url, url: subArea.url}) }}" title="{{ subArea.name }}">{{ subArea.name }}</a></h4>
+											{% endfor %}
+									{% endif %}
+							</div>
+						{% endfor %}
+						</div>
+						<h2><a class="sitemap-h2" href="{{ path('plugins_blog_homepage') }}" title="Blog">Blog</a></h2>
+						<div class="site-map">
+						{% for category in categories %}
+								<div class="left practic-area-column">
+										<h4><a href="{{ path('plugins_blog_view_category', {categoryUrl: category.url}) }}" title="{{ category.name }}">{{ category.name }}</a></h4>
+										{% if category.blogTopics %}
+												{% for topic in category.blogTopics %}
+														<h4><a href="{{ path('plugins_blog_view_topic', {categoryUrl: category.url, topicUrl: topic.url}) }}" title="{{ topic.name }}">{{ topic.name }}</a></h4>
+												{% endfor %}
+										{% endif %}
+								</div>
+						{% endfor %}
+						</div>
+						<h2><a class="sitemap-h2" href="{{ path('plugins_practic_area_homepage') }}" title="About us">About us</a></h2>
+						<div class="site-map">
+						{% for attorney in attorneys %}
+							<div class="left practic-area-column">
+								<h4><a href="{{ path('app_about_attorney', {url: attorney.url}) }}" title="{{ attorney.name }}">{{ attorney.name }}</a></h4>
+							</div>
+						{% endfor %}
+						</div>
+						<h2><a class="sitemap-h2" href="{{ path('plugins_practic_area_homepage') }}" title="News & Views">News & Views</a></h2>
+						<h2><a class="sitemap-h2" href="{{ path('plugins_practic_area_homepage') }}" title="Contact us">Contact us</a></h2>
+						<br>
+						<p>
+							Contact New York criminal lawyer Yelena Sharova The Defense Lawyers at the Law Office of Yelena Sharova P.C. are adept at legal matters spanning criminal, civil, and family law. They are not the run of the mill lawyers who come from a big bulge bracket law firm. They select their attorneys carefully. You would feel the difference with a lawyer from a boutique firm like this with big firm firepower. Call for a Free 15-Minute evaluation of your case and see what the lawyers who understand what it means to put it on the line for their clients. <br>
+							CONTACT US NOW!!! (212) 321-0741 
+						</p>
+
+						<hr>
+						{% include "default/fb.html.twig" %}
+					</div>
+				</div>
+
+				<div class="contactus">
+						{% include "AppBundle:Contact:contact_block_form.html.twig" %}
+						<div class="fb-square">{% include 'default/fb-square.html.twig' %}</div>
+				</div>
+					</div>
+			</section>
+	</wrapper>
+{% endblock %}

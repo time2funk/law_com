@@ -1,0 +1,28 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block content %}
+<section id="loginContent">
+    <div class="loginForm">
+        <h2>Login please</h2>
+        <br />
+        {% if error %}
+            <div class="error">Incorrect login or password</div>
+        {% endif %}
+    
+        <form action="{{ path("_security_check") }}" method="post" id="login">
+            <div class="decore">
+                <label for="username">Login:</label>
+                <input type="text" id="username" name="_username" value="{{ last_username }}" />
+            </div>
+            <div class="clear"></div>
+            <div class="decore">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="_password" />
+            </div>
+            <div class="clear"></div>
+            <input type="submit" class="submit" value="Submit" />
+            <div class="clear"></div>
+        </form>
+    </div>
+</section>
+{% endblock %}

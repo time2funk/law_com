@@ -1,0 +1,57 @@
+var Form = {
+    options: {
+        target: '',
+        validation: ''
+    },
+    
+    init: function(options) {
+        var self = this, 
+            submiHandler = function(form){
+                self.submitHandler(form);
+            };
+        self.options = $.extend(self.options, options);
+        
+        $(self.options.target).validate($.extend(self.options.validation, {submitHandler: submiHandler}));
+    },
+    
+    submitHandler: function(form) {
+        var self = this,
+            submitButton = $('input[type="submit"]', $(form));
+        
+        self.loadingSubmit(submitButton);
+        $.ajax({
+            type: $(form).attr('method'),
+            url: $(form).attr('action'),
+            data: $(form).serialize(),
+            success: function (response) {
+                Popup.success(response.data.message);
+                $(form)[0].reset();
+                self.unloadingSubmit(submitButton);
+            },
+            error: function (data) {
+                Popup.error("Error while sending your message. Please try again later, or call us at the top of the page.");
+                self.unloadingSubmit(submitButton);
+            }
+        });
+    },
+    
+    loadingSubmit: function(submit) {
+        $(submit).addClass('loading');
+        this.disableSubmit(submit);
+    },
+    
+    unloadingSubmit: function(submit) {
+        $(submit).removeClass('loading');
+        this.enableSubmit(submit);
+    },
+    
+    enableSubmit: function(submit) {
+        $(submit).removeClass('disabled');
+        $(submit).removeAttr('disabled');
+    },
+    
+    disableSubmit: function(submit) {
+        $(submit).addClass('disabled');
+        $(submit).attr('disabled', 'disabled');
+    }
+};

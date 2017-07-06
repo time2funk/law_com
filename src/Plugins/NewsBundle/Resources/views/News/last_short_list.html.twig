@@ -1,0 +1,23 @@
+{% block latestNews %}
+    {% if not news is empty%}
+    <section class="latest-news">
+        <div class="content-row">
+            <div class="latest-container">
+                <h2 class="title">
+                    <img src="{{ asset("images/latest-news-title.png") }}" alt="latest news"/>
+                </h2>
+                {% for entity in news %}
+                    <div class="element {{ loop.first ? "priority" }}">
+                        <a href="{{ path('plugins_news_view', {'url' : entity.url}) }}">
+                            <h3 class="title">
+                                {{ entity.name }}
+                            </h3>
+                        </a>
+                        {{ entity.short | raw }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,309 @@
+# app/config/routing.yml
+
+#redirect urls
+plugins_practic_area_homepage_old:
+    path:     /practic_areas/
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: plugins_practic_area_homepage
+        permanent: true
+
+plugins_practic_area_view_old:
+    path:     /practic_areas/{url}
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: plugins_practic_area_view
+        permanent: true
+
+plugins_practic_area_subsection_view_old:
+    path:     /practic_areas/{urlSection}/{url}
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: plugins_practic_area_subsection_view
+        permanent: true
+
+admin:
+    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
+    prefix: /admin
+
+_sonata_admin:
+    resource: .
+    type: sonata_admin
+    prefix: /admin
+
+remove_trailing_slash:
+    path: /{url}
+    defaults: { _controller: AppBundle:Redirecting:removeTrailingSlash }
+    requirements:
+        url: .*/$
+    methods: [GET]
+
+
+plugins_blog:
+    resource: "@PluginsBlogBundle/Resources/config/routing.yml"
+    prefix:   /blog
+
+plugins_news:
+    resource: "@PluginsNewsBundle/Resources/config/routing.yml"
+    prefix:   /news
+
+plugins_practic_area:
+    resource: "@PluginsPracticAreaBundle/Resources/config/routing.yml"
+    prefix:   /practic-areas
+
+app:
+    resource: "@AppBundle/Resources/config/routing.yml"
+    prefix:   /
+
+site_map:
+    resource: '@PluginsSiteMapBundle/Resources/config/routing.yml'
+    prefix: /
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
+plugins_blog_get_topic_options:
+    pattern: /admin/plugins/blog/blogpost/get-topics-by-category/{categoryId}
+    defaults: {_controller: PluginsBlogBundle:BlogAdmin:getTopicOptionsByCategory}
+    options:
+        expose: true
+
+
+#redirect urls end
+
+#hard redirect
+
+path_404_tax:
+    path:     /practic-areas/tax
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: plugins_practic_area_homepage
+        permanent: true
+
+path_404_blog_cd6:
+    path:     /blog/criminal-defense/6
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: plugins_blog_homepage
+        permanent: true
+
+path_404_blog_cd9:
+    path:     /blog/criminal-defense/9
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: plugins_blog_homepage
+        permanent: true
+
+path_404_blog_cd12:
+    path:     /blog/criminal-defense/12
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: plugins_blog_homepage
+        permanent: true
+
+path_404_blog_fl1:
+    path:     /blog/family-law/1
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: plugins_blog_homepage
+        permanent: true
+
+path_404_blog_fl2:
+    path:     /blog/family-law/2
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: plugins_blog_homepage
+        permanent: true
+
+path_404_blog_fl3:
+    path:     /blog/family-law/3
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: plugins_blog_homepage
+        permanent: true
+
+path_404_blog_aa:
+    path:     /blog/attorneys-advices
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: plugins_blog_homepage
+        permanent: true
+
+path_404_news:
+    path: /news/marriage-is-a-beautiful-thing
+    defaults:
+        _controller: FrameworkBundle:Redirect:urlRedirect
+        path: /news/the-new-divorce-law-how-long-you-were-married-matters
+        permanent: true
+
+path_404_wrong_url_1:
+    path: /blog/family-law/15-Could-Your{url}
+    defaults:
+        _controller: FrameworkBundle:Redirect:urlRedirect
+        path: /blog/family-law/16-could-your-child-s-opinion-be-used-in-determining-your-custody-battle
+        permanent: true
+
+path_404_cyber:
+    path: /practic-areas/cyber-crimes/cyber-crimes
+    defaults:
+        _controller: FrameworkBundle:Redirect:urlRedirect
+        path: /practic-areas/cyber-crimes/cyber-crime-lawyers
+        permanent: true
+
+path_404_dui:
+    path: /practic-areas/dui-dwi-charges/dui-dwi
+    defaults:
+        _controller: FrameworkBundle:Redirect:urlRedirect
+        path: /practic-areas/dui-dwi-charges/dui-dwi-charges-lawyers
+        permanent: true
+
+#
+# path_404_wrong_url_2:
+#     path: /practic-areas/criminal-appeals/lawyer-for-order-of-protection-and-restraining-orders
+#     defaults:
+#         _controller: FrameworkBundle:Redirect:urlRedirect
+#         path: /practic-areas/family-law/lawyer-for-order-of-protection-and-restraining-orders
+#         permanent: true
+#
+# path_404_wrong_url_3:
+#     path: /practic-areas/criminal-defense/same-sex-divorces
+#     defaults:
+#         _controller: FrameworkBundle:Redirect:urlRedirect
+#         path: /practic-areas/family-law/same-sex-divorces
+#         permanent: true
+#
+# #new structure
+# path_404_business-fraud-lawyers:
+#     path:     /practic-areas/criminal-defense/business-fraud-lawyers
+#     defaults:
+#         _controller: FrameworkBundle:Redirect:redirect
+#         route: /practic-areas/white-collar-crimes/business-fraud-lawyers
+#         permanent: true
+#
+# path_404_economic-crimes:
+#     path:     /practic-areas/criminal-defense/economic-crimes
+#     defaults:
+#         _controller: FrameworkBundle:Redirect:redirect
+#         route: /practic-areas/white-collar-crimes/economic-crimes
+#         permanent: true
+#
+# path_404_marriage-fraud:
+#     path:     /practic-areas/criminal-defense/marriage-fraud
+#     defaults:
+#         _controller: FrameworkBundle:Redirect:redirect
+#         route: /practic-areas/white-collar-crimes/marriage-fraud
+#         permanent: true
+#
+# path_404_money-laundering:
+#     path:     /practic-areas/criminal-defense/money-laundering
+#     defaults:
+#         _controller: FrameworkBundle:Redirect:redirect
+#         route: /practic-areas/white-collar-crimes/money-laundering
+#         permanent: true
+#
+# path_404_drug-charges:
+#     path:     /practic-areas/criminal-defense/drug-charges
+#     defaults:
+#         _controller: FrameworkBundle:Redirect:redirect
+#         route: /practic-areas/drugs/drug-charges
+#         permanent: true
+#
+# path_404_embezzlement-lawyers:
+#     path:     /practic-areas/criminal-defense/embezzlement-lawyers
+#     defaults:
+#         _controller: FrameworkBundle:Redirect:redirect
+#         route: /practic-areas/white-collar-crimes/embezzlement-lawyers
+#         permanent: true
+#
+# path_404_medicare-fraud:
+#     path:     /practic-areas/criminal-defense/medicare-fraud
+#     defaults:
+#         _controller: FrameworkBundle:Redirect:redirect
+#         route: /practic-areas/white-collar-crimes/medicare-fraud
+#         permanent: true
+#
+# path_404_wire-fraud-attorney:
+#     path:     /practic-areas/criminal-defense/wire-fraud-attorney
+#     defaults:
+#         _controller: FrameworkBundle:Redirect:redirect
+#         route: /practic-areas/white-collar-crimes/wire-fraud-attorney
+#         permanent: true
+#
+# path_404_public-corruption-lawyers:
+#     path:     /practic-areas/criminal-defense/public-corruption-lawyers
+#     defaults:
+#         _controller: FrameworkBundle:Redirect:redirect
+#         route: /practic-areas/white-collar-crimes/public-corruption-lawyers
+#         permanent: true
+#
+# path_404_insurance-fraud-lawyers:
+#     path:     /practic-areas/criminal-defense/insurance-fraud-lawyers
+#     defaults:
+#         _controller: FrameworkBundle:Redirect:redirect
+#         route: /practic-areas/white-collar-crimes/insurance-fraud-lawyers
+#         permanent: true
+#
+# path_404_mortgage-fraud-attorney:
+#     path:     /practic-areas/criminal-defense/mortgage-fraud-attorney
+#     defaults:
+#         _controller: FrameworkBundle:Redirect:redirect
+#         route: /practic-areas/white-collar-crimes/mortgage-fraud-attorney
+#         permanent: true
+#
+# path_404_white-collar-crime:
+#     path:     /practic-areas/criminal-defense/white-collar-crime
+#     defaults:
+#         _controller: FrameworkBundle:Redirect:redirect
+#         route: /practic-areas/white-collar-crimes/white-collar-crime-attorney
+#         permanent: true
+#
+# path_404_medicaid-fraud-charges:
+#     path:     /practic-areas/criminal-defense/medicaid-fraud-charges
+#     defaults:
+#         _controller: FrameworkBundle:Redirect:redirect
+#         route: /practic-areas/white-collar-crimes/medicaid-fraud-charges
+#         permanent: true
+#
+# path_404_cyber-crime-lawyers:
+#     path:     /practic-areas/criminal-defense/cyber-crime-lawyers
+#     defaults:
+#         _controller: FrameworkBundle:Redirect:redirect
+#         route: /practic-areas/cyber-crimes/cyber-crimes
+#         permanent: true
+#
+# path_404_felony-charge-defense-lawyer:
+#     path:     /practic-areas/criminal-defense/felony-charge-defense-lawyer
+#     defaults:
+#         _controller: FrameworkBundle:Redirect:redirect
+#         route: /practic-areas/violent-crimes/felony-charge-defense-lawyer
+#         permanent: true
+#
+# path_404_financial-transaction-structural-offense:
+#     path:     /practic-areas/criminal-defense/financial-transaction-structural-offense
+#     defaults:
+#         _controller: FrameworkBundle:Redirect:redirect
+#         route: /practic-areas/white-collar-crimes/financial-transaction-structural-offense
+#         permanent: true
+#
+# path_404_dui-dwi-charges-lawyers:
+#     path:     /practic-areas/criminal-defense/dui-dwi-charges-lawyers
+#     defaults:
+#         _controller: FrameworkBundle:Redirect:redirect
+#         route: /practic-areas/dui-dwi-charges/dui-dwi
+#         permanent: true
+#
+# path_404_identity-theft-and-fraud:
+#     path:     /practic-areas/criminal-defense/identity-theft-and-fraud
+#     defaults:
+#         _controller: FrameworkBundle:Redirect:redirect
+#         route: /practic-areas/cyber-crimes/identity-theft-and-fraud
+#         permanent: true
+#
+# path_404_racketeering-charges-lawyers:
+#     path:     /practic-areas/criminal-defense/racketeering-charges-lawyers
+#     defaults:
+#         _controller: FrameworkBundle:Redirect:redirect
+#         route: /practic-areas/white-collar-crimes/racketeering-charges-lawyers
+#         permanent: true
+
+#hard redirect end

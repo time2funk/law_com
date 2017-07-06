@@ -1,0 +1,9 @@
+services:
+    sonata.admin.content:
+        class: Plugins\ContentBundle\Admin\ContentAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Dashboard", label: "Content" }
+        arguments:
+            - ~
+            - Plugins\ContentBundle\Entity\Content
+            - ~

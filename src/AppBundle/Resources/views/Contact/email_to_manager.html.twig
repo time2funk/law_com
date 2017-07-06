@@ -1,0 +1,23 @@
+{% block body %}
+<div>
+<h3>New message!</h3>
+
+<b>Date:</b><br/>
+<i>{{ interest.createdFormat }}</i><br><br>
+
+<b>Name:</b><br/>
+<i>{{ interest.name }}</i><br><br>
+
+<b>Email:</b><br/>
+<i><a href="mailto:{{ interest.email }}">{{ interest.email }}</a></i><br><br>
+
+<b>Phone:</b><br/>
+<i>{{ interest.phone }}</i><br><br>
+
+<b>Message:</b><br/>
+<i>{{ interest.message}}</i><br><br>
+
+Best regards,
+Sharovalaw.com
+</div>
+{% endblock %}

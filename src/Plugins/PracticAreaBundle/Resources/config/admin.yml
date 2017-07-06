@@ -1,0 +1,22 @@
+services:
+    sonata.admin.practic_area:
+        class: Plugins\PracticAreaBundle\Admin\PracticAreaAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Practice areas", label: "Practice areas sections" }
+        arguments:
+            - ~
+            - Plugins\PracticAreaBundle\Entity\PracticArea
+            - ~
+        calls:
+          - [ setTemplate, [edit, PluginsPracticAreaBundle:Admin:base_edit.html.twig]]
+
+    sonata.admin.practic_area_sub_section:
+        class: Plugins\PracticAreaBundle\Admin\PracticAreaSubSectionAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Practice areas", label: "Practice areas sub sections" }
+        arguments:
+            - ~
+            - Plugins\PracticAreaBundle\Entity\PracticAreaSubSection
+            - ~
+        calls:
+          - [ setTemplate, [edit, PluginsPracticAreaBundle:Admin:base_edit.html.twig]]

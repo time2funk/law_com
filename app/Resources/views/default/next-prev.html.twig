@@ -1,0 +1,37 @@
+{% block nextPrev %}
+
+	{% set np_params = queries ? np_params|merge(queries) : np_params %}
+
+	{% if (pages > 1) %}
+
+			{% if (page == 1) %}
+
+					{% set np_params = np_params|merge({'page': page+1}) %}
+					<link rel="next" href="{{ path(route, np_params) }}">
+
+			{% endif %}
+
+			{% if (pages > 2) %}
+
+					{% if (page != 1 and page != pages) %}
+					
+									{% set np_params = np_params|merge({'page': page-1}) %}
+									<link rel="prev" href="{{ path(route, np_params) }}">
+
+									{% set np_params = np_params|merge({'page': page+1}) %}
+									<link rel="next" href="{{ path(route, np_params) }}">
+
+					{% endif %}
+
+			{% endif %}
+
+			{% if (page == pages) %}
+
+					{% set np_params = np_params|merge({'page': page-1}) %}
+					<link rel="prev" href="{{ path(route, np_params) }}">
+
+			{% endif %}
+
+	{% endif %}
+
+{% endblock %}

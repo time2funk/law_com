@@ -1,0 +1,29 @@
+var Popup = {
+    options: {
+        'pop-title': false,
+        'pop-body': '',
+        'btn-text': 'ok',
+        'btn-style': 'submit',
+        'foot-align': 'center',
+        'round-corners': false
+    },
+    
+    success: function(message) {
+        var self = this,
+            options = {'pop-body': message};
+        
+        $("#pop-holder").removeClass("error");
+        self.options = $.extend(self.options, options);
+        simplePopup(self.options);
+    },
+    
+    error: function(message) {
+        var self = this,
+            options = {
+                'pop-body': message
+            };
+        $("#pop-holder").addClass("error");
+        self.options = $.extend(self.options, options);
+        simplePopup(self.options);
+    },
+};

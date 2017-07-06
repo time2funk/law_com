@@ -1,0 +1,19 @@
+{% block tmateListMenu %}
+<div id="static-menu">
+  <span class="back">
+    <a href="{{path(back)}}">
+      <img src="/img/grey-l.svg">
+      back
+    </a>
+  </span>
+  <ul>
+    {% for tmate in attorneys %}
+        {% if  tmate.name == attorney.name %}
+          <li class='cur'>{{ tmate.name }}</li>
+        {% else %}
+          <li><a href="{{ tmate.url }}">{{ tmate.name }}</a></li>
+        {% endif %}
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

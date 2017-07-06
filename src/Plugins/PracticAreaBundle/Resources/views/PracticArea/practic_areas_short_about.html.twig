@@ -1,0 +1,25 @@
+<div class="panel-group" id="practice-short">
+
+	{% for area in areas %}
+	<div class="panel panel-default">
+		<div id="{{ area.areaId }}" class="panel-collapse collapse {{ loop.first ? "in act" }}">
+			<div class="panel-body">
+				{{ area.short | raw }}
+				<a href="{{ path("plugins_practic_area_view", { "url" : area.url }) }}">
+					Read More
+				</a>
+			</div>
+		</div>
+
+		<div class="panel-heading">
+			<a data-toggle="collapse" data-parent="#practice-short" href="#{{ area.areaId }}">
+				<h4 class="panel-title">
+					{{ area.name }}
+				</h4>
+				<i class="fa fa-angle-right" aria-hidden="true"></i>
+			</a>
+		</div>
+	</div>
+	{% endfor %}
+
+</div>

@@ -1,0 +1,31 @@
+{% for item in posts %}
+	{% set x = 0 %}
+	{% set break = false %}
+	{% set name %}{% endset %}
+	{% set text = item.name | split(' ') %}
+	{% if item.blogCategory == category %}
+
+		<span>
+			<a href="{{ path("plugins_blog_view_post_without_topic", {categoryUrl: item.blogCategory.url, id: item.id, postUrl: item.url}) }}">
+
+				{% for t in text if not break %}
+					{% set x = (x + t|length) %}
+					{% if (x) < 79 %}
+						{{t}}
+					{% else %}
+						{% set break = true %}
+					{% endif %}
+				{% endfor %}
+
+			</a>
+		</span>
+
+	{% else %}
+
+		<span><a href="{{ path('plugins_blog_homepage') }}">Blog</a></span>
+
+	{% endif %}
+
+	<p><a href="{{ path("plugins_blog_view_post_without_topic", {categoryUrl: item.blogCategory.url, id: item.id, postUrl: item.url}) }}">blog</a></p>
+
+{% endfor %}

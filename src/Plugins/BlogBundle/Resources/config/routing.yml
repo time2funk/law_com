@@ -1,0 +1,65 @@
+blog_ajax_search:
+    pattern:  /
+    defaults: { _controller: PluginsBlogBundle:Blog:blogPost }
+    requirements:
+      _method:  POST
+
+#amp urls
+amp__plugins_blog_view_post:
+    path:     /amp/{categoryUrl}/{topicUrl}/{id}-{postUrl}
+    defaults: { _controller: PluginsBlogBundle:Blog:viewPost }
+    requirements:
+        id: \d+
+
+amp__plugins_blog_view_post_without_topic:
+    path:     /amp/{categoryUrl}/{id}-{postUrl}
+    defaults: { _controller: PluginsBlogBundle:Blog:viewPost }
+    requirements:
+        id: \d+
+
+#redirect urls
+plugins_blog_view_post_without_topic_old:
+    path:     /{categoryUrl}/{id},{postUrl}
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: plugins_blog_view_post_without_topic
+        permanent: true
+    requirements:
+        id: \d+
+
+plugins_blog_view_post_old:
+    path:     /{categoryUrl}/{topicUrl}/{id},{postUrl}
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: plugins_blog_view_post
+        permanent: true
+    requirements:
+        id: \d+
+#redirect urls end
+
+plugins_blog_homepage:
+    path:     /{trailingSlash}
+    defaults: { _controller: PluginsBlogBundle:Blog:index, trailingSlash : "/" }
+    requirements:
+        trailingSlash:  "[/]{0,1}"
+
+plugins_blog_view_post_without_topic:
+    path:     /{categoryUrl}/{id}-{postUrl}
+    defaults: { _controller: PluginsBlogBundle:Blog:viewPost }
+    requirements:
+        id: \d+
+
+plugins_blog_view_category:
+    path:     /{categoryUrl}
+    defaults: { _controller: PluginsBlogBundle:Blog:index }
+
+plugins_blog_view_topic:
+    path:     /{categoryUrl}/{topicUrl}
+    defaults: { _controller: PluginsBlogBundle:Blog:index }
+
+
+plugins_blog_view_post:
+    path:     /{categoryUrl}/{topicUrl}/{id}-{postUrl}
+    defaults: { _controller: PluginsBlogBundle:Blog:viewPost }
+    requirements:
+        id: \d+

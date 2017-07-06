@@ -1,0 +1,102 @@
+{% block slideShow %}
+<section class="slide-show-container">
+		<section class="slide-show">
+				<!-- <div class="element slide01" style="width: 1000px;">
+						<span>
+								clients come first
+						</span>
+				</div> -->
+				<div class="element slide02" style="width: 1000px;">
+						<span>
+								power<br/>
+								precision<br/>
+								professionalism
+						</span>
+				</div>
+				<div class="element slide03" style="width: 1000px;">
+						<span>
+								details matter
+						</span>
+				</div>
+				<div class="element slide04" style="width: 1000px;">
+						<span>
+								dedicated<br/>
+								and experienced<br/>
+								attorneys at your service
+						</span>
+				</div>
+				<div class="element slide05" style="width: 1000px;">
+						<span>
+								we think<br/>
+								outside the box
+						</span>
+				</div>
+		</section>
+		<div class="slide-left"></div>
+		<div class="slide-right"></div>
+</section>
+{% endblock %}
+
+{% render controller("PluginsPracticAreaBundle:PracticArea:practicAreasShortList") %}
+
+{% block avvo %}
+<section class="avvo-section clearfix hidden">
+		{% include "AppBundle:App:avvo.html.twig" %}
+</section>
+{% endblock %}
+
+{% render controller("PluginsNewsBundle:News:lastShortList") %}
+
+{% block contactSection %}
+<section class="contact-section content-row clearfix">
+		<div class="text-containter">
+				<h2 class="title">{{ whyUsBlock.name }}</h2>
+				{{ whyUsBlock.content | raw }}
+		</div>
+		{% render controller("AppBundle:Contact:form") %}
+</section>
+{% endblock %}
+
+{% block greatQuotes %}
+<section class="great-quotes">
+		<div class="content-box">
+				<h2 id="h2-test">Testimonials</h2>
+				<div class="content clearfix">
+				{% for quote in quotes %}
+						<div class="quote" style="width: 850px;">
+								<span class="quote-text">
+										{{ quote.quoteS | raw }}
+								</span>
+								<span class="author">
+										{{ quote.nameS  | raw }}
+								</span>
+						</div>
+						{% endfor %}
+				</div>
+				<div class="slide-left"></div>
+				<div class="slide-right"></div>
+		</div>
+</section>
+{% endblock %}
+
+{% if not blogDisable %}
+		{% block blogSection %}
+		<section class="contact-section content-row clearfix">
+				<!-- <h2 id="h2-blog">Blog</h2> -->
+				{% render controller("PluginsBlogBundle:Blog:short") %}
+		</section>
+		{% endblock %}
+{% endif %}
+
+{% block barAssociationsBlock %}
+<section class="bar-association-section clearfix {{ not blogDisable ? "highlighted" }}">
+		{% render controller("AppBundle:App:barAssociationBlock") %}
+</section>
+
+
+{% endblock %}
+<script type="text/javascript">
+$(document).ready(function(){
+		$(".avvo-section").removeClass("hidden");
+});
+</script>

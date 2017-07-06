@@ -1,0 +1,43 @@
+{% block verticalMenu %}
+    <div class="sidebar-practice">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div id="PracriceAreas" role="tab" class="panel-heading">
+                    <h4 class="panel-title">
+                        <a href="{{ path('plugins_practic_area_homepage') }}" title="Pracrice Areas">Pracrice Areas</a>
+                    </h4>
+                </div>
+                <div id="CriminalPractice" role="tabpanel" aria-labelledby="PracriceAreas" class="panel submenu">
+                    <div id="accordion" class="panel-group list-practice">
+                        {% for area in areas %}
+                            <div class="panel panel-default">
+                                <div class="panel-heading inner">
+                                    <div class="panel-title">
+                                        <a href="#practic-{{ area.id }}" data-toggle="collapse" data-parent="#accordion"
+                                           class="list-group-item {{ (area.id == activeId) or (loop.first and activeId == 0) ? "in" }}"></a>
+                                        <a href="{{ path("plugins_practic_area_view", { "url" : area.url }) }}"
+                                           title="{{ area.name }}" class="itself">{{ area.name }}</a>
+                                    </div>
+                                </div>
+                                {% if not area.practicAreaSubSections is empty %}
+                                    <div id="practic-{{ area.id }}"
+                                         class="panel-collapse collapse  {{ (area.id == activeId) or (loop.first and activeId == 0) ? "in" }}">
+                                        <ul class="list-group">
+                                            {% for subSection in area.practicAreaSubSections %}
+                                                <li class="list-group-item">
+                                                    <a href="{{ path("plugins_practic_area_subsection_view", { "url" : subSection.url, "urlSection" : area.url }) }}"
+                                                       title="{{ subSection.name }}"
+                                                       class="list-group-item">{{ subSection.name }}</a>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

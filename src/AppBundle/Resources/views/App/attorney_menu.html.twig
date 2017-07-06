@@ -1,0 +1,15 @@
+{% block verticalMenu %}
+<span class="title">
+    about us
+</span>
+<ul>
+    {% for attorney in attorneys %}
+    <li class="main without-background">
+        <a href="{{ path("app_about_attorney", { "url" : attorney.url }) }}" title="{{ attorney.name }}" class="{{ attorney.id == activeId ? "selected" }}">{{ attorney.name }}</a>
+    </li>
+    {% endfor %}
+</ul>
+<div class="left-menu-border"></div>
+{% include "AppBundle:App:bar_assoc_short.html.twig" %}
+
+{% endblock %}

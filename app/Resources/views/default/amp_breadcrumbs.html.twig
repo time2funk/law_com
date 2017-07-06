@@ -1,0 +1,15 @@
+{% block ampBreadcrumbsSection %}
+<section class="breadcrumbs amp-breadcrumbs content-row">
+    {% if elements is defined %}
+        {% for element in elements %}
+            {% if not element.params is defined %}
+                {% set params = {} %}
+            {% else %}
+                {% set params = element.params %}
+            {% endif %}
+            <div class="amp-bc-a"><a href="{{ path(element.url, params) }}" title="{{ element.name }}">{{ element.name }}</a></div>
+        {% endfor %}
+    {% endif %}
+    <div  class="amp-bc-current"><span class="current-page">{{ currentPage }}</span></div>
+</section>
+{% endblock %}

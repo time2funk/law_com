@@ -1,0 +1,14 @@
+{# app/Resources/TwigBundle/views/Exception/error.html.twig #}
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block title %}Page under construction - Law office of Yelena Sharova{% endblock %}
+
+{% block content %}
+<section class="error-page content-row">
+    <div class="h1">Ooops.</div>
+        <div>
+        <span>Page under construction.</span>
+        <span><a href="{{ path("homepage") }}">Return to homepage.</a></span>
+    </div>
+</section>
+{% endblock %}

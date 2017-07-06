@@ -1,0 +1,53 @@
+{% block verticalMenu %}
+<div id="side_menu">
+		<h2>Practice areas</h2>
+		{% include "PluginsPracticAreaBundle:PracticArea:search_practice.html.twig"%}
+		<!-- QUERRIES!!! -->
+    {% for area in areas %}
+				{% if area.id == activeId or home == true %}
+				<ul>
+						<li class="link two-lvl focus">
+								<a href="{{ path("plugins_practic_area_view", { "url" : area.url }) }}"
+										 title="{{ area.name }}" class="itself">
+										 <span>{{ area.name }}</span>
+								</a>
+								{% if not area.practicAreaSubSections is empty %}
+										<ul>
+											{% for subSection in area.practicAreaSubSections %}
+												<li>
+													<a href="{{ path("plugins_practic_area_subsection_view", { "url" : subSection.url, "urlSection" : area.url }) }}"
+														 title="{{ subSection.name }}"
+														 class="list-group-item">
+														{{ subSection.name }}
+													</a>
+												</li>
+											{% endfor %}
+										</ul>
+							{% endif %}
+						</li>
+				</ul>
+				<div>
+						<div class="link two-lvl focus">
+								<a href="{{ path("plugins_practic_area_view", { "url" : area.url }) }}"
+										 title="{{ area.name }}" class="itself">
+										 <span>{{ area.name }}</span>
+								</a>
+								{% if not area.practicAreaSubSections is empty %}
+										<ul>
+											{% for subSection in area.practicAreaSubSections %}
+												<li>
+													<a href="{{ path("plugins_practic_area_subsection_view", { "url" : subSection.url, "urlSection" : area.url }) }}"
+														 title="{{ subSection.name }}"
+														 class="list-group-item">
+														{{ subSection.name }}
+													</a>
+												</li>
+											{% endfor %}
+										</ul>
+							{% endif %}
+						</div>
+				</div>
+				{% endif %}
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% block contactForm %}
+		<form action="{{ path('app_contact_send') }}" method="post" id="contact-form" novalidate>
+			<div class="form-data">
+				<lable class="action">name</lable>
+				{{ form_widget(form.name, {'attr': {'placeholder': ' '}}) }}
+			</div>
+			<div class="form-data">
+				<lable class="action">email</lable>
+				{{ form_widget(form.email, {'attr': {'placeholder': ' ', 'type': 'email'}}) }}
+			</div>
+			<div class="form-data">
+				<lable class="action">phone</lable>
+				{{ form_widget(form.phone, {'attr': {'placeholder': ' ', 'type': 'tel'}}) }}
+			</div>
+			<div class="form-data">
+				<lable>message</lable>
+				{{ form_widget(form.message, {'attr': {'placeholder': 'Tell Us About Your Case'}}) }}
+			</div>
+
+			<button type="submit" class="pbtn btn btn-primary">contact us</button>
+		</form>
+<script>
+$(document).ready(function() {
+    Form.init({
+        target: "#{{ formName }}-form",
+        validation: {
+            rules: {
+                "{{ formName }}[name]": {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 200
+                },
+                "{{ formName }}[email]": {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 255
+                },
+                "{{ formName }}[phone]": {
+                    required: true,
+                    phone: true
+                },
+                "{{ formName }}[message]": {
+                    required: true,
+                }
+            },
+            messages: {
+                "{{ formName }}[name]": {
+                    required: "Name is required.",
+                    minlength: "Name must be at least 3 characters.",
+                    maxlength: "Name must be no more than 200 characters.",
+                },
+                "{{ formName }}[email]": {
+                    required: "Email is required.",
+                    maxlength: "Email must be no more than 255 characters.",
+                },
+                "{{ formName }}[phone]": {
+                    required: "Phone is required.",
+                }
+            }
+        }
+    });
+});
+</script>
+{% endblock %}

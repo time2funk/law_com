@@ -1,0 +1,17 @@
+parameters:
+    database_driver: pdo_mysql
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: sharovalaw
+    database_user: root
+    database_password: qwe123qwe
+    
+    mailer_transport: smtp
+    mailer_host: 144.76.243.109
+    mailer_user: administrator@sharovalaw.com
+    mailer_password: 47d9eEnY
+    
+    locale: en
+    secret: d1c3e6cef9a18b33135cf2b7fa1742cde487f57c
+    
+    contact_email: sharova@sharovalaw.com

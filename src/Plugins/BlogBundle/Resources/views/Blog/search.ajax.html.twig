@@ -1,0 +1,67 @@
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+      var searchRequest = null;
+      $("#search").val('');
+
+      console.log('search');
+
+      $("#search").on('keyup',function() {
+
+          var that = this;
+          var value = $(this).val();
+
+          var entitySelector = $("#search_show").html('');
+          if ( $(this).val().length > 0 ) {
+              if (searchRequest != null)
+                  searchRequest.abort();
+              $('#search_show').empty()
+
+              $.ajax({
+                  type: "POST",
+                  url: "{{ path('blog_ajax_search') }}",
+                  data: {
+                      'searchText' : value
+                  },
+                  success: function(msg){
+                    console.log('responce');
+                    console.log(msg);
+
+                    if (value==$(that).val()) {
+                        var result = JSON.parse(msg);
+                        console.log(result);
+
+                        $('#static-show').slideUp("fast");
+                        var content = '';
+                        if(result.length == 0){
+                          content += '<li>no result...</li>';
+                        }else{
+                          for(var i=0; i < result.length; i++){
+                            content +=
+                            '<li class="item">'+
+                              '<a href="/blog/'+
+                              result[i]['short_home']+
+                              '/'+
+                              result[i]['id']+
+                              '-'+
+                              result[i]['url']+
+                              '"title="'+
+                              result[i]['name']+'">'+
+                              '<h3>'+result[i]['name']+'</h3>'+
+                              '</a>'+
+                              '<hr>'+
+                            '</li>';
+                          }
+                        }
+                        $('#search_show').append(content);
+                        $('#blog-filtered').slideDown('fast');
+                      }
+                   }
+              });
+          }// if( $(this).val().length > 0 )
+          else{
+            $('#blog-filtered').slideUp('fast');
+            $('#static-show').slideDown('fast');
+          }
+        });// #search on 'keyup'
+    });
+</script>

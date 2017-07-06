@@ -1,0 +1,9 @@
+.associations .bar-association {
+  float: left;
+  height: 150px;
+  margin: 30px 43px;
+  vertical-align: middle;
+  line-height: 245px;
+	width: 24%;
+	text-align: center;
+}

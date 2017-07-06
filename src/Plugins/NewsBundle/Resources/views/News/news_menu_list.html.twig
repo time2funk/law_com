@@ -1,0 +1,21 @@
+{% block newsMenuList %}
+<div class="inner">
+    <span class="title">
+        news
+    </span>
+    <div class="news-previews">
+        {% for entity in news %}
+        <div class="news-preview">
+            <a href="{{ entity.id == activeId ? '#' : path('plugins_news_view', {'url' : entity.url}) }}" title="{{ entity.name }}" class="title {{ entity.id == activeId ? "active" }}">
+                {{ entity.name }}
+            </a>
+            <span class="date">{{ entity.dateUsFormat }}</span>
+            <p>
+                {{ entity.shortSimpleText }}
+            </p>
+            <a href="{{ entity.id == activeId ? '#' : path('plugins_news_view', {'url' : entity.url}) }}" class="readmore">read more</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

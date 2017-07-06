@@ -1,0 +1,140 @@
+<style>
+    #news-filtered{
+      display: none;
+    }
+</style>
+
+<div class="content">
+<!-- _________________ -->
+  {% if home == true %}
+<!-- _________________ -->
+    {% include "default/breadcrumbs.html.twig" with { 'currentPage': 'News & Views', 'elements': {
+            0: {'url': "plugins_news_homepage", 'name': "News & Views" }
+        }, 'home' : true } %}
+    <div class="list" id="news-show">
+      <ul id='statis_show'>
+        {% for entity in elements %}
+        <li class="item">
+          <a href="{{ path('plugins_news_view', {'url' : entity.url}) }}" title="{{ entity.name }}"><h3>{{ entity.name }}</h3></a>
+          <div class="short">
+            {{ entity.short | raw }}
+          </div>
+          <hr>
+          <div class="info">
+            <div class="row">
+              <div class="dc">
+                <div class="pattr"><span>date:</span>{{ entity.dateUsFormat }}</div>
+              </div>
+              <div class="readmore"><a href="{{ path('plugins_news_view', {'url' : entity.url}) }}"><span class="pbtn">read more</span></a></div>
+            </div>
+          </div>
+        </li>
+      {% endfor %}
+      </ul>
+    </div>
+<!-- _________________ -->
+  {% else %}
+<!-- _________________ -->
+	  {% include "default/breadcrumbs.html.twig" with { 'currentPage': element.name, 'elements': { 0: {'url': "plugins_news_homepage", 'name': "News & Views" }}, 'home' : false } %}
+    <div class="txt" id="news-show">
+      {% if element %}
+      <h1>{{ element.name }}</h1>
+      <div class="postdate">{{ element.dateUsFormat }}</div>
+      {{ element.content | raw }}
+      {% endif %}
+      <hr>
+      {% include "default/fb.html.twig" %}
+    </div>
+<!-- _________________ -->
+  {% endif %}
+<!-- _________________ -->
+  <div class="list" id="news-filtered">
+    <ul id='search_show'>
+    </ul>
+  </div>
+<!-- _________________ -->
+</div>
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+      var searchRequest = null;
+      $("#search").val('');
+
+      console.log('search');
+
+      $("#search").on('keyup',function() {
+
+          var that = this;
+          var value = $(this).val();
+
+          var entitySelector = $("#search_show").html('');
+          if ( $(this).val().length > 0 ) {
+              if (searchRequest != null)
+                  searchRequest.abort();
+              $('#search_show').empty()
+
+              $.ajax({
+                  type: "POST",
+                  url: "{{ path('news_ajax_search') }}",
+                  data: {
+                      'searchText' : value
+                  },
+                  success: function(msg){
+                    console.log('responce');
+                    //we need to check if the value is the same
+                    if (value==$(that).val()) {
+                        var result = JSON.parse(msg);
+                        console.log(result);
+
+                        $('#news-show').slideUp("fast");
+                        var content = '';
+                        if(result.length == 0){
+                          content += '<li>no result...</li>';
+                        }else{
+                          for(var i=0; i < result.length; i++){
+                            content +=
+                            '<li class="item">'+
+                              '<a href="/news/'+
+                              result[i]['url']+
+                              '"title="'+result[i]['name']+'">'+
+                              '<h3>'+result[i]['name']+'</h3>'+
+                              '</a>'+
+                              // '<div class="short">'+
+                              //   result[i]['short']+
+                              // '</div>'+
+                              '<hr>'+
+                              // '<div class="info">'+
+                              //   '<div class="row">'+
+                                  // '<div class="dc">'+
+                                  //   '<div class="pattr">'+
+                                  //   '<span>date:</span>'+
+                                  //   'time....'+
+                                  //   '</div>'+
+                                  // '</div>'+
+                              //     '<div class="readmore">'+
+                              //     '<a href="news/'+
+                              //     result[i]['url']+
+                              //     '"><span class="pbtn">'+
+                              //     'read more'+
+                              //     '</span>'+
+                              //     '</a>'+
+                              //     '</div>'+
+                              //   '</div>'+
+                              // '</div>'+
+                            '</li>';
+                          }
+                        }
+                        $('#search_show').append(content);
+                        $('#news-filtered').slideDown('fast');
+                      }
+                   }
+              });
+          }// if( $(this).val().length > 0 )
+          else{
+            $('#news-filtered').slideUp('fast');
+            $('#news-show').slideDown('fast');
+          }
+
+        });// #search on 'keyup'
+    });
+</script>

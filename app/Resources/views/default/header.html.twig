@@ -1,0 +1,13 @@
+{% block headerContent %}
+    {% set route = app.request.attributes.get('_route') %}
+		<header id="header" class="container-fluid">
+			<div class="top_menu">
+				<div class="container justify-content-end">
+					<span class="text">Call Today for a Free Consultation</span>
+					<span class="phone">{{ contact_phone }}</span>
+				</div>
+			</div>
+
+			{% include "default/menu_section.html.twig" %}
+		</header>
+{% endblock %}

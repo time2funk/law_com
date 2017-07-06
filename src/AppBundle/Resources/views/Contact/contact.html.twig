@@ -1,0 +1,105 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block title %}{{- page.metatitle ? page.metatitle : parent() -}}s - New York Law Frim{% endblock %}
+{% block meta_keywords %}{{- page.metakeywords ? page.metakeywords : parent() -}}s - New York Law Frim{% endblock %}
+{% block meta_description %}{{- page.metadescription ? page.metadescription : parent() -}}s - New York Law Frim{% endblock %}
+{% block og_title %}{{- page.metatitle ? page.metatitle : parent() -}}{% endblock %}
+{% block og_descr %}{{- page.metadescription ? page.metadescription : parent() -}}{% endblock %}
+{% block last_updated_block %}{{ page.updatedAtDatetime }}{% endblock %}
+
+{% block bodyId %}contacts{% endblock %}
+{% block bodyClass %}contacts{% endblock %}
+
+{% block content %}
+
+		<wrapper>
+    <section id="map">
+
+			<div class="map-self">
+				<div class="row">
+					<script type="text/javascript">
+					console.log('zhopa');
+					console.log($(".overlay"));
+					$(".overlay").on("click", function() {
+						console.log('idi nahuj');
+						window.location = $(this).find("a").attr("href");
+						// return false;
+					});
+					</script>
+					<!-- <div class="overlay">
+						<a href="https://www.google.pl/maps/place/Law+Office+of+Yelena+Sharova,+P.C./@40.7633087,-73.9732639,15z/data=!4m5!3m4!1s0x0:0x8bf0a6bb2ad8f1a5!8m2!3d40.7633087!4d-73.9732639"></a>
+					</div> -->
+					<div class="map-iframe m320">{{ map_1024 | raw}}</div>
+					<div class="map-iframe m576">{{ map_1024 | raw}}</div>
+					<div class="map-iframe m768">{{ map_768 | raw}}</div>
+					<div class="map-iframe m1024">{{ map_1024 | raw}}</div>
+					<div class="map-iframe m1440">{{ map_1440 | raw}}</div>
+					<div class="map-iframe m1920">{{ map_1440 | raw}}</div>
+					<div class="map-iframe m2560">{{ map_1440 | raw}}</div>
+					<div class="info">
+						<ul class="address">
+							<li class="part addr">
+								<h4>Addres 1</h4>
+								<p>
+									{{ contact_address_short1 }}
+									<br>
+									{{ contact_address_state }} {{ contact_zip1 }}
+								</p>
+							</li>
+							<li class="part addr">
+								<h4>Addres 2</h4>
+								<p>
+									{{ contact_address_short2 }}
+									<br>
+									{{ contact_district2 }}, {{ contact_address_state }} {{ contact_zip2 }}
+								</p>
+							</li>
+							<div class="part phone">
+								<h4>Contact</h4>
+								<p>
+									Phone: {{ contact_phone }}
+									<br>
+									Fax: {{ contact_fax }}
+									<br>
+									<a href="mailto:{{ contact_email1 }}?subject=From Contacts Page">{{ contact_email1 }}</a>
+								</p>
+							</div>
+						</ul>
+						<div class="form">
+							{% include "AppBundle:Contact:contact_block_form.html.twig" %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+    <section id="about">
+			<div class="container">
+			  <div class="row row-eq-height">
+			    <div class="liberty">
+						<img id="sl" src="/img/sl.png" alt="Sharova Law Firm">
+			    </div>
+					<div class="why-us">
+						<h3>{{ whyUsBlockContacts.name  | replace({" Contacts":""})}}</h3>
+            {{ whyUsBlockContacts.content | raw }}
+            <div class="text-containter">
+              <p>Knowledge without passion can be considered a recital of facts at best.</p>
+              <p>You don’t want a lawyer going to court with you, fighting for you, while just reciting the
+                  facts. You need a passionate fighter who is willing to put the work in, who can empathize
+                  with you. You also need a team of attorneys that do know the facts and are willing to
+                  uncover them to preserve their client’s rights and lives. The attorneys at the Law Office of
+                  Yelena Sharova P.C. are the attorneys you are looking for, whether it is a criminal, civil
+                  or family matter; these defense attorneys are the cream of the crop. Call for a Free
+                  15-minute Consultation and see why hiring the Law Office of Yelena Sharova is right for you.
+                  Don’t put your life on hold.</p>
+							<h3>CALL TODAY!</h3>
+							<hr>
+            </div>
+						{% include "default/fb.html.twig" %}
+						</div>
+					</div>
+			  </div>
+			</div>
+		</section>
+  </wrapper>
+{% endblock %}

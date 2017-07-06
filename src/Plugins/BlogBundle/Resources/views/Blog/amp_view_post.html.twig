@@ -1,0 +1,96 @@
+{% extends 'AppBundle::amp.html.twig' %}
+
+{# {% block title %}{{- post.metatitle ? post.metatitle : '' }} - Law office of Yelena Sharova{% endblock %} #}
+{% block title %}{{- post.metatitle ? post.metatitle : '' }}{% endblock %}
+{% block meta_keywords %}{{- post.metakeywords ? post.metakeywords : parent() }}{% endblock %}
+{% block meta_description %}{{- post.metadescription ? post.metadescription : parent() }}{% endblock %}
+{% block og_title %}{{- post.metatitle ? post.metatitle : parent() -}}{% endblock %}
+{% block og_descr %}{{- post.metadescription ? post.metadescription : parent() -}}{% endblock %}
+{% block last_updated_block %}{{ post.updatedAtDatetime}}{% endblock %}
+
+{% block header %}
+		{% include "amp/header.html.twig" %}
+		{% include 'amp/amp_nav_blog.html.twig' %}
+		{% include 'amp/amp_form.html.twig' %}
+		{% include "amp/amp_sidebar.html.twig" %}
+		{% include "amp/amp_banner.html.twig" %}
+{% endblock %}
+
+{% block content %}
+<section class="amp-container">
+    <div class="content-row clearfix">
+			<div class="float"></div>
+
+			{# {% include "amp/menu_section.html.twig" %} #}
+
+        <div class="amp-col">
+            <div class="amp-text">
+
+                {{ post.ampContent | raw }}
+								<div>
+									<amp-social-share type="email"
+											width="40"
+											height="40"
+											data-param-text="{{- post.metatitle ? post.metatitle : parent() -}}"
+											data-param-url="https://sharovalaw.com/"
+											data-param-attribution="AMPhtml"></amp-social-share>
+									<amp-social-share type="facebook"
+											width="40"
+											height="40"
+											data-param-text="{{- post.metatitle ? post.metatitle : parent() -}}"
+											data-param-url="https://sharovalaw.com/"
+											data-param-attribution="AMPhtml"
+											data-param-app_id="254325784911610"></amp-social-share>
+									<amp-social-share type="gplus"
+											width="40"
+											height="40"
+											data-param-text="{{- post.metatitle ? post.metatitle : parent() -}}"
+											data-param-url="https://sharovalaw.com/"
+											data-param-attribution="AMPhtml"></amp-social-share>
+									<amp-social-share type="linkedin"
+											width="40"
+											height="40"
+											data-param-text="{{- post.metatitle ? post.metatitle : parent() -}}"
+											data-param-url="https://sharovalaw.com/"
+											data-param-attribution="AMPhtml"></amp-social-share>
+									<amp-social-share type="pinterest"
+											width="40"
+											height="40"
+											data-param-text="{{- post.metatitle ? post.metatitle : parent() -}}"
+											data-param-url="https://sharovalaw.com/"
+											data-param-attribution="AMPhtml"></amp-social-share>
+									<amp-social-share type="tumblr"
+											width="40"
+											height="40"
+											data-param-text="{{- post.metatitle ? post.metatitle : parent() -}}"
+											data-param-url="https://sharovalaw.com/"
+											data-param-attribution="AMPhtml"></amp-social-share>
+									<amp-social-share type="twitter"
+											width="40"
+											height="40"
+											data-param-text="{{- post.metatitle ? post.metatitle : parent() -}}"
+											data-param-url="https://sharovalaw.com/"
+											data-param-attribution="AMPhtml"></amp-social-share>
+									<amp-social-share type="whatsapp"
+											width="40"
+											height="40"
+											data-param-text="{{- post.metatitle ? post.metatitle : parent() -}}"
+											data-param-url="https://sharovalaw.com/"
+											data-param-attribution="AMPhtml"></amp-social-share>
+								</div>
+
+								{# include "amp/amp_social.html.twig" #}
+								{% include "amp/amp_map.html.twig" %}
+                <div
+                class="fb-like"
+                data-share="true"
+                data-width="450"
+                data-show-faces="false">
+                </div>
+                <div class="bootom-line"></div>
+            </div>
+            {# include "PluginsPracticAreaBundle:PracticArea:additional_description.html.twig" #}
+        </div>
+    </div>
+</section>
+{% endblock %}
