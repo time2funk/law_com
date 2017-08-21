@@ -1,0 +1,24 @@
+.social-links a{
+    background-image: url('/images/sprite-icons.png');
+    background-repeat: none;
+}
+.social-links a{
+    background-position: 0 -10px;
+    width: 8px;
+}
+.social-links a + a{
+    width: 21px;
+    background-position: 0 -46px;
+}
+.social-links a + a + a{
+    width: 39px;
+    background-position: 0 -81px;
+}
+.social-links a + a + a + a{
+    width: 17px;
+    background-position: 0 -117px;
+}
+.social-links a + a + a + a + a{
+    width: 16px;
+    background-position: 0 -154px;
+}
